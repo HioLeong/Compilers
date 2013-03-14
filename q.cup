@@ -1,0 +1,24 @@
+package Q;
+
+import sym;
+
+terminal EOF, NOT, OR, AND;
+terminal PLUS, MINUS, TIMES, DIVIDE, POWER;
+terminal IN, CONCAT, LEN; 
+terminal LESS, EQLESS, GREATER, GREATEREQ, EQ, NEQ;
+terminal LCURL, RCURL;
+terminal LPRAN, RPRAN;
+terminal LBRACE, RBRACE;
+terminal ASSIGN,
+terminal COLON, SEMI, COMMA, DOT;
+terminal LTUPLE, RTUPLE;
+terminal IF, ELSE;
+terminal DO, WHILE, UNTIL, REPEAT;
+terminal RETURN;
+terminal ID;
+
+non terminal TYPE;
+non terminal CHAR, STRING;
+non terminal INT, FLOAT;
+non terminal BOOL;
+

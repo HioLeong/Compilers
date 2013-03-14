@@ -1,0 +1,12 @@
+fdef maths() {
+	int a = 2;
+	float f = 1.2;
+	bool b = false;
+	char c = 't';
+	string s = "hello";
+	tuple t = [|1,2,3|];
+	while(a<4){
+	   a+2;
+		// this is a comment
+	}do
+}
