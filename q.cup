@@ -1,7 +1,10 @@
 package Q;
 
+import java_cup.runtime.*;
+
 import sym;
 
+/* Terminal */
 terminal EOF, NOT, OR, AND;
 terminal PLUS, MINUS, TIMES, DIVIDE, POWER;
 terminal IN, CONCAT, LEN; 
@@ -9,16 +12,40 @@ terminal LESS, EQLESS, GREATER, GREATEREQ, EQ, NEQ;
 terminal LCURL, RCURL;
 terminal LPRAN, RPRAN;
 terminal LBRACE, RBRACE;
-terminal ASSIGN,
+terminal ASSIGN;
 terminal COLON, SEMI, COMMA, DOT;
 terminal LTUPLE, RTUPLE;
+terminal FDEF, TDEF;
 terminal IF, ELSE;
 terminal DO, WHILE, UNTIL, REPEAT;
 terminal RETURN;
 terminal ID;
+terminal VOID;
+terminal Char CHAR;
+terminal String STRING;
+terminal int INT;
+terminal float FLOAT; 
+terminal bool BOOL;
+terminal TYPE;
 
-non terminal TYPE;
-non terminal CHAR, STRING;
-non terminal INT, FLOAT;
-non terminal BOOL;
+/* Non-Terminal */
+non terminal Operand;
+non terminal Expression, Statement;	
+non terminal Function;
+non terminal Var_assignment, Data_type_assignment;
 
+/* Precedence */
+
+/* Grammar */
+Operand ::= CHAR:l 
+		| STRING 
+		| INT 
+		| FLOAT 
+		| BOOL
+		;
+
+Var_assignment ::= ID COLON TYPE ASSIGN Operand SEMI
+				| ID COLON TYPE SEMI;
+
+Expression ::= NOT Expression
+			| Expression OR Expression;
