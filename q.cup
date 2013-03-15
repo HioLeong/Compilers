@@ -31,21 +31,61 @@ terminal TYPE;
 /* Non-Terminal */
 non terminal Operand;
 non terminal Expression, Statement;	
-non terminal Function;
-non terminal Var_assignment, Data_type_assignment;
+non terminal Function_definition;
+non terminal Dot_notation;
+non terminal Variable_assignment, Variable_declaration, Data_type_declaration;
+non terminal Parameter, Parameters_list;
 
 /* Precedence */
 
 /* Grammar */
-Operand ::= CHAR:l 
+Operand ::= CHAR
 		| STRING 
 		| INT 
 		| FLOAT 
 		| BOOL
 		;
 
-Var_assignment ::= ID COLON TYPE ASSIGN Operand SEMI
+Data_type_declaration ::= TDEF ID COLON Parameters_list SEMI;
+
+Variable_declaration ::= 
+						| ID COLON TYPE SEMI
+
+Variable_assignment ::= ID COLON TYPE ASSIGN Expression SEMI
 				| ID COLON TYPE SEMI;
 
-Expression ::= NOT Expression
-			| Expression OR Expression;
+Dot_notation ::= ID DOT Dot_notation
+				| ID;
+
+Expression ::=  
+			| NOT Expression
+			| Expression OR Expression
+			| Expression AND Expression
+			| Expression PLUS Expression
+			| Expression MINUS Expression
+			| Expression TIMES Expression 
+			| Expression DIVIDE Expression
+			| Expression POWER Expression
+			| Expression IN Expression
+			| Expression CONCAT Expression
+			| LEN LPRAN Expression RPRAN
+			| Expression LESS Expression
+			| Expression EQLESS EQLESS
+			| Expression GREATER Expression
+			| Expression GREATEREQ Expression
+			| Expression EQ Expression
+			| Expression NEQ Expression
+			| LPRAN Expression RPRAN
+			| LBRACE Expression RBRACE
+			| Dot_notation	
+			| ID
+			| Operand;
+
+Function_definition := FDEF ID LPRAN Parameters_list LPRAN SEMI TYPE LCURL ... RCURL SEMI 
+					| ; 
+
+Parameter ::= ID SEMI TYPE;
+
+Parameters_list ::= Parameter COMMA Parameters_list
+					| Parameter;
+
