@@ -36,6 +36,7 @@ non terminal control_flow;
 non terminal function_definition;
 non terminal function_call;
 non terminal dot_notation;
+non terminal main;
 non terminal variable_assignment, variable_declaration, data_type_declaration;
 non terminal variable_declaration_assignment, variable_initialisation;
 non terminal parameter, parameters_list;
@@ -85,24 +86,24 @@ variable_declaration_assignment ::= ID COLON type ASSIGN variable_initialisation
 dot_notation ::= ID DOT dot_notation
 				| ID;
 
-expression ::= NOT expression
-			| expression OR expression
-			| expression AND expression
-			| expression PLUS expression
-			| expression MINUS expression
-			| expression TIMES expression 
-			| expression DIVIDE expression
-			| expression POWER expression
-			| expression IN expression
-			| expression CONCAT expression
-			| LEN LPRAN expression RPRAN
-			| expression LESS expression
-			| expression EQLESS EQLESS
-			| expression GREATER expression
-			| expression GREATEREQ expression
-			| expression EQ expression
-			| expression NEQ expression
-			| LPRAN expression RPRAN
+expression ::= NOT expression {:System.out.println("NOT reduced");:}
+			| expression OR expression {:System.out.println("OR reduced");:}
+			| expression AND expression {:System.out.println("AND reduced");:}
+			| expression PLUS expression {:System.out.println("PLUS reduced");:}
+			| expression MINUS expression {:System.out.println("MINUS reduced");:}
+			| expression TIMES expression {:System.out.println("TIMES reduced");:}
+			| expression DIVIDE expression {:System.out.println("DIVIDE reduced");:}
+			| expression POWER expression {:System.out.println("POWER reduced");:}
+			| expression IN expression {:System.out.println("IN reduced");:}
+			| expression CONCAT expression {:System.out.println("CONCAT reduced");:}
+			| LEN LPRAN expression RPRAN {:System.out.println("LEN reduced");:}
+			| expression LESS expression {:System.out.println("LESS reduced");:} 
+			| expression EQLESS expression {:System.out.println("EQLESS reduced");:}
+			| expression GREATER expression {:System.out.println("GREATER reduced");:}
+			| expression GREATEREQ expression {:System.out.println("GREATEREQ reduced");:}
+			| expression EQ expression {:System.out.println("EQ reduced");:}
+			| expression NEQ expression {:System.out.println("NEQ reduced");:}
+			| LPRAN expression RPRAN {:System.out.println("BRACES reduced");:}
 			| dot_notation	
 			| function_call
 			| operand;
@@ -135,3 +136,5 @@ list ::= LBRACE variable_initialisation RBRACE
 		| LBRACE RBRACE;
 
 sequence_indexing ::= ID LBRACE INT RBRACE;
+
+main ::= LCURL body RCURL;
