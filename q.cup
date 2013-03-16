@@ -43,6 +43,14 @@ non terminal tuple, list;
 non terminal sequence_indexing;
 
 /* Precedence */
+precedence left DOT;
+precedence left OR;
+precedence left AND;
+precedence nonassoc LESS, EQLESS, GREATER, GREATEREQ, EQ, NEQ;
+precedence left PLUS, MINUS;
+precedence left DIVIDE, TIMES;
+precedence right POWER;
+precedence NOT;
 
 /* Grammar */
 operand ::= CHAR
@@ -73,8 +81,7 @@ variable_declaration_assignment ::= ID COLON type ASSIGN variable_initialisation
 dot_notation ::= ID DOT dot_notation
 				| ID;
 
-expression ::=  EOF expression
-			| NOT expression
+expression ::= NOT expression
 			| expression OR expression
 			| expression AND expression
 			| expression PLUS expression
@@ -96,7 +103,7 @@ expression ::=  EOF expression
 			| dot_notation	
 			| ID
 			| operand
-			| function_call;
+			| function_call	;
 
 statement ::= variable_declaration
 			| control_flow
