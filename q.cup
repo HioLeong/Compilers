@@ -39,6 +39,7 @@ non terminal dot_notation;
 non terminal variable_assignment, variable_declaration, data_type_declaration;
 non terminal variable_declaration_assignment, variable_initialisation;
 non terminal parameter, parameters_list;
+non terminal tuple, list;
 
 /* Precedence */
 
@@ -48,6 +49,7 @@ operand ::= CHAR
 		| INT 
 		| FLOAT 
 		| BOOL
+		| tuple
 		;
 
 type ::= TYPE
@@ -112,4 +114,10 @@ parameter ::= ID SEMI type;
 
 parameters_list ::= parameter COMMA parameters_list
 					| parameter;
+
+tuple ::= LTUPLE variable_initialisation RTUPLE
+		| LTUPLE RTUPLE;
+
+list ::= LBRACE variable_initialisation RBRACE;
+		| LBRACE RBRACE;
 
