@@ -29,63 +29,87 @@ terminal bool BOOL;
 terminal TYPE;
 
 /* Non-Terminal */
-non terminal Operand;
-non terminal Expression, Statement;	
-non terminal Function_definition;
-non terminal Dot_notation;
-non terminal Variable_assignment, Variable_declaration, Data_type_declaration;
-non terminal Parameter, Parameters_list;
+non terminal operand;
+non terminal type;
+non terminal expression, statement, body;
+non terminal control_flow;
+non terminal function_definition;
+non terminal function_call;
+non terminal dot_notation;
+non terminal variable_assignment, variable_declaration, data_type_declaration;
+non terminal variable_declaration_assignment, variable_initialisation;
+non terminal parameter, parameters_list;
 
 /* Precedence */
 
 /* Grammar */
-Operand ::= CHAR
+operand ::= CHAR
 		| STRING 
 		| INT 
 		| FLOAT 
 		| BOOL
 		;
 
-Data_type_declaration ::= TDEF ID COLON Parameters_list SEMI;
+type ::= TYPE
+		| ID;
 
-Variable_declaration ::= 
-						| ID COLON TYPE SEMI
+data_type_declaration ::= TDEF ID COLON parameters_list SEMI;
 
-Variable_assignment ::= ID COLON TYPE ASSIGN Expression SEMI
-				| ID COLON TYPE SEMI;
+variable_declaration ::= ID COLON type SEMI
+						| variable_declaration_assignment;
 
-Dot_notation ::= ID DOT Dot_notation
+variable_initialisation ::= expression COMMA variable_initialisation
+							| expression;
+
+variable_assignment ::= ID ASSIGN variable_initialisation SEMI;
+
+variable_declaration_assignment ::= ID COLON type ASSIGN variable_initialisation SEMI;
+
+dot_notation ::= ID DOT dot_notation
 				| ID;
 
-Expression ::=  
-			| NOT Expression
-			| Expression OR Expression
-			| Expression AND Expression
-			| Expression PLUS Expression
-			| Expression MINUS Expression
-			| Expression TIMES Expression 
-			| Expression DIVIDE Expression
-			| Expression POWER Expression
-			| Expression IN Expression
-			| Expression CONCAT Expression
-			| LEN LPRAN Expression RPRAN
-			| Expression LESS Expression
-			| Expression EQLESS EQLESS
-			| Expression GREATER Expression
-			| Expression GREATEREQ Expression
-			| Expression EQ Expression
-			| Expression NEQ Expression
-			| LPRAN Expression RPRAN
-			| LBRACE Expression RBRACE
-			| Dot_notation	
+expression ::=  EOF expression
+			| NOT expression
+			| expression OR expression
+			| expression AND expression
+			| expression PLUS expression
+			| expression MINUS expression
+			| expression TIMES expression 
+			| expression DIVIDE expression
+			| expression POWER expression
+			| expression IN expression
+			| expression CONCAT expression
+			| LEN LPRAN expression RPRAN
+			| expression LESS expression
+			| expression EQLESS EQLESS
+			| expression GREATER expression
+			| expression GREATEREQ expression
+			| expression EQ expression
+			| expression NEQ expression
+			| LPRAN expression RPRAN
+			| LBRACE expression RBRACE
+			| dot_notation	
 			| ID
-			| Operand;
+			| operand;
 
-Function_definition := FDEF ID LPRAN Parameters_list LPRAN SEMI TYPE LCURL ... RCURL SEMI 
-					| ; 
+statement ::= variable_declaration
+			| control_flow
+			| function_definition;
 
-Parameter ::= ID SEMI TYPE;
+body ::= statement body
+		| statement;
 
-Parameters_list ::= Parameter COMMA Parameters_list
-					| Parameter;
+control_flow ::= IF LPRAN expression RPRAN LCURL body RCURL ELSE LCURL body RCURL
+				| WHILE LPRAN expression RPRAN DO LCURL body RCURL
+				| REPEAT LCURL body RCURL UNTIL LPRAN expression RPRAN SEMI
+				| RETURN expression SEMI;
+
+function_definition := FDEF ID LPRAN parameters_list LPRAN SEMI type LCURL body RCURL SEMI;
+
+function_call ::= ID LPRAN parameters_list RPRAN SEMI;
+
+parameter ::= ID SEMI type;
+
+parameters_list ::= parameter COMMA parameters_list
+					| parameter;
 
