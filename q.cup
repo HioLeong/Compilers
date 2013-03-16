@@ -43,6 +43,7 @@ non terminal tuple, list;
 non terminal sequence_indexing;
 
 /* Precedence */
+precedence right IN;
 precedence left DOT;
 precedence left OR;
 precedence left AND;
@@ -102,7 +103,6 @@ expression ::= NOT expression
 			| expression EQ expression
 			| expression NEQ expression
 			| LPRAN expression RPRAN
-			| LBRACE expression RBRACE
 			| dot_notation	
 			| function_call
 			| operand;
