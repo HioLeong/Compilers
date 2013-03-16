@@ -30,7 +30,7 @@ terminal TYPE;
 
 /* Non-Terminal */
 non terminal operand;
-non terminal type;
+non terminal type, return_type;
 non terminal expression, statement, body;
 non terminal control_flow;
 non terminal function_definition;
@@ -43,6 +43,15 @@ non terminal tuple, list;
 non terminal sequence_indexing;
 
 /* Precedence */
+precedence left DOT;
+precedence left OR;
+precedence left AND;
+precedence nonassoc LESS, EQLESS, GREATER, GREATEREQ, EQ, NEQ;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+precedence right POWER;
+precedence right NOT; 
+precedence left CONCAT;
 
 /* Grammar */
 operand ::= CHAR
@@ -56,6 +65,9 @@ operand ::= CHAR
 
 type ::= TYPE
 		| ID;
+
+return_type ::= type 
+				| VOID;
 
 data_type_declaration ::= TDEF ID COLON parameters_list SEMI;
 
@@ -92,9 +104,8 @@ expression ::= NOT expression
 			| LPRAN expression RPRAN
 			| LBRACE expression RBRACE
 			| dot_notation	
-			| ID
-			| operand
-			| function_call;
+			| function_call
+			| operand;
 
 statement ::= variable_declaration
 			| control_flow
@@ -108,7 +119,7 @@ control_flow ::= IF LPRAN expression RPRAN LCURL body RCURL ELSE LCURL body RCUR
 				| REPEAT LCURL body RCURL UNTIL LPRAN expression RPRAN SEMI
 				| RETURN expression SEMI;
 
-function_definition ::= FDEF ID LPRAN parameters_list LPRAN SEMI type LCURL body RCURL SEMI;
+function_definition ::= FDEF ID LPRAN parameters_list LPRAN SEMI return_type LCURL body RCURL SEMI;
 
 function_call ::= ID LPRAN parameters_list RPRAN SEMI;
 
