@@ -5,7 +5,7 @@ import java_cup.runtime.*;
 import sym;
 
 /* Terminal */
-terminal EOF, NOT, OR, AND;
+terminal NOT, OR, AND;
 terminal PLUS, MINUS, TIMES, DIVIDE, POWER;
 terminal IN, CONCAT, LEN; 
 terminal LESS, EQLESS, GREATER, GREATEREQ, EQ, NEQ;
@@ -43,14 +43,6 @@ non terminal tuple, list;
 non terminal sequence_indexing;
 
 /* Precedence */
-precedence left DOT;
-precedence left OR;
-precedence left AND;
-precedence nonassoc LESS, EQLESS, GREATER, GREATEREQ, EQ, NEQ;
-precedence left PLUS, MINUS;
-precedence left DIVIDE, TIMES;
-precedence right POWER;
-precedence NOT;
 
 /* Grammar */
 operand ::= CHAR
@@ -61,7 +53,6 @@ operand ::= CHAR
 		| tuple
 		| list
 		| sequence_indexing;
-		;
 
 type ::= TYPE
 		| ID;
@@ -103,7 +94,7 @@ expression ::= NOT expression
 			| dot_notation	
 			| ID
 			| operand
-			| function_call	;
+			| function_call;
 
 statement ::= variable_declaration
 			| control_flow
@@ -117,7 +108,7 @@ control_flow ::= IF LPRAN expression RPRAN LCURL body RCURL ELSE LCURL body RCUR
 				| REPEAT LCURL body RCURL UNTIL LPRAN expression RPRAN SEMI
 				| RETURN expression SEMI;
 
-function_definition := FDEF ID LPRAN parameters_list LPRAN SEMI type LCURL body RCURL SEMI;
+function_definition ::= FDEF ID LPRAN parameters_list LPRAN SEMI type LCURL body RCURL SEMI;
 
 function_call ::= ID LPRAN parameters_list RPRAN SEMI;
 
@@ -129,7 +120,7 @@ parameters_list ::= parameter COMMA parameters_list
 tuple ::= LTUPLE variable_initialisation RTUPLE
 		| LTUPLE RTUPLE;
 
-list ::= LBRACE variable_initialisation RBRACE;
+list ::= LBRACE variable_initialisation RBRACE
 		| LBRACE RBRACE;
 
-sequence_indexing ::= id LBRACE INT RBRACE;
+sequence_indexing ::= ID LBRACE INT RBRACE;
