@@ -68,22 +68,22 @@ datatype_decl
 ;
 
 function_decl ::= 
-FDEF ID LEFTPAREN parameter_clist RIGHTPAREN COLON function_type block;
+FDEF ID LEFTPAREN parameter_clist:pl RIGHTPAREN COLON function_type:ft block:b {: RESULT = new FunctionDeclNode(pl,ft,b); :}
+;
 
 var_type ::= 
-ID COLON type
+ID:name COLON type:t {:RESULT = new VarTypeNode(name,t);:}
 ; 
 
 var_decl ::= 
-var_type var_init SEMICOLON;
+var_type:vt var_init:vi SEMICOLON {: RESULT = new VarDeclNode(vt,vi); :};
 
 var_init ::=
-ASSIGN expression_clist
-|
-;
+ASSIGN expression_clist:el {: RESULT = new VarInitNode(el); :}
+|;
 
 datatype_decl ::=
-TDEF ID COLON parameter_clist SEMICOLON
+TDEF ID COLON parameter_clist:pl SEMICOLON {: RESULT = new DataTypeDeclNode(pl); :}
 ;
 
 function_type ::= 
@@ -92,12 +92,24 @@ VOID
 
 //two-productions are needed to avoid ambiguity
 parameter_clist ::= 
-var_type parameter_clist2
+var_type:vt parameter_clist2:pl {: RESULT = new ParameterListNode(vt,pl); :}
 |;
 
 parameter_clist2 ::= 
-COMMA var_type parameter_clist2
-|;
+COMMA var_type:vt parameter_clist2:pl 
+{: if (pl != null) {
+                       pl.varTypes.add(vt);
+                       pl.parameterLists.add(pl);
+                       RESULT = new ParameterListSNode(pl.varTypes,pl.parameterLists);
+                   } else {
+                       List<VarTypeNode> types = new ArrayList<VarTypeNode>();
+                       List<ParameterListSNode> lists = new ArrayList<ParameterListSNode>();
+                       types.add(vt);
+                       lists.add(pl);
+                       RESULT = new ParameterListSNode(types,lists);
+                   }
+                :}
+;
 
 block ::= 
 LEFTBRACE local_decl_list statement_list RIGHTBRACE
@@ -106,8 +118,20 @@ LEFTBRACE local_decl_list statement_list RIGHTBRACE
 
 // Local declaration only allows variable declarations
 local_decl_list ::= 
-local_decl_list var_decl
-| var_decl
+local_decl_list:ldl var_decl:vd
+{: if (sl != null) {
+                       ldl.varDecls.add(vd);
+                       RESULT = new LocalDeclListNode(ldl.varDecls);
+                   } else {
+                       List<VarDeclNode> res = new ArrayList<VarDeclNode>();
+                       res.add(vd);
+                       RESULT = new LocalDeclListNode(res);
+                   }
+                :}
+| var_decl:vd
+{: List<VarDeclNode> res = new ArrayList<VarDeclNode>();
+                   res.add(vd);
+                   RESULT = new LocalDeclListNode(res); :}
 ;
 
 statement_list ::= 
