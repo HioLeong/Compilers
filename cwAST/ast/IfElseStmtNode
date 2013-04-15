@@ -1,6 +1,6 @@
 package ast;
 
-public abstract class IfElseStmtNode extends StmtNode {
+public class IfElseStmtNode extends StmtNode {
 
 	protected ExprNode exprNode;
 	protected StmtList ifStmtlist;
