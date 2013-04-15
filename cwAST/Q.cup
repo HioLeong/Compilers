@@ -173,15 +173,15 @@ STRINGLITERAL:str {: RESULT = new StringSeqNode(str); :}
 accessor ::= 
 ID:name 
 {: List<IdNode> res = new ArrayList<IdNode>();
-                   res.add(name);
+                   res.add(new IdNode(name));
                    RESULT = new AccessNode(res); :}
 | accessor:a DOT ID:name 
 {: if (a != null) {
-                       a.ids.add(name);
+                       a.ids.add(new IdNode(name));
                        RESULT = new AccessNode(a.ids);
                    } else {
                        List<IdNode> res = new ArrayList<IdNode>();
-                       res.add(name);
+                       res.add(new IdNode(name));
                        RESULT = new IdNode(res);
                    }
                 :}
