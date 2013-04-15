@@ -208,32 +208,32 @@ COMMA expression expression_clist2
 expression ::=
 term
 | NOT expression
-| expression:e1 PLUS term:t1
-{: RESULT = new PlusExprNode(e1,t1);:}
-| expression:e1 MINUS term:t1
-{: RESULT = new MinusExprNode(e1,t1);:}
-| expression:e1 OR term:t1
-{: RESULT = new OrExprNode(e1,t1);:}
-| expression:e1 IN term:t1
-{: RESULT = new InExprNode(e1,t1);:}
-| expression:e1 LESSTHAN term:t1
-{: RESULT = new LessThanExprNode(e1,t1);:}
-| expression:e1 LESSTHANEQUAL term:t1
-{: RESULT = new LessThanEqualExprNode(e1,t1);:}
-| expression:e1 GREATERTHAN term:t1
-{: RESULT = new GreaterThanExprNode(e1,t1);:}
-| expression:e1 GREATERTHANEQUAL term:t1
-{: RESULT = new GreaterThanEqualExprNode(e1,t1);:}
-| expression:e1 EQUAL term:t1
-{: RESULT = new EqualExprNode(e1,t1);:}
-| expression:e1 NOTEQUAL term:t1
-{: RESULT = new NotEqualExprNode(e1,t1);:}
-| expression:e1 CONCAT term:t1
-{: RESULT = new ConcatExprNode(e1,t1);:}
-| expression LEFTBRACKET expression COLON expression RIGHTBRACKET
-| expression LEFTBRACKET expression COLON RIGHTBRACKET
-| expression LEFTBRACKET COLON expression RIGHTBRACKET
-| expression LEFTBRACKET expression RIGHTBRACKET
+| expression:e PLUS term:t
+{: RESULT = new PlusExprNode(e,t);:}
+| expression:e MINUS term:t
+{: RESULT = new MinusExprNode(e,t);:}
+| expression:e OR term:t
+{: RESULT = new OrExprNode(e,t);:}
+| expression:e IN term:t
+{: RESULT = new InExprNode(e,t);:}
+| expression:e LESSTHAN term:t
+{: RESULT = new LessThanExprNode(e,t);:}
+| expression:e LESSTHANEQUAL term:t
+{: RESULT = new LessThanEqualExprNode(e,t);:}
+| expression:e GREATERTHAN term:t
+{: RESULT = new GreaterThanExprNode(e,t);:}
+| expression:e GREATERTHANEQUAL term:t
+{: RESULT = new GreaterThanEqualExprNode(e,t);:}
+| expression:e EQUAL term:t
+{: RESULT = new EqualExprNode(e,t);:}
+| expression:e NOTEQUAL term:t
+{: RESULT = new NotEqualExprNode(e,t);:}
+| expression:e CONCAT term:t
+{: RESULT = new ConcatExprNode(e,t);:}
+| expression:e LEFTBRACKET expression:e1 COLON expression:e2 RIGHTBRACKET {: RESULT = new ParExprNode(e,e1,e2); :}
+| expression:e LEFTBRACKET expression:e1 COLON RIGHTBRACKET {: RESULT = new ParExprNode(e,e1); :}
+| expression:e LEFTBRACKET COLON expression:e1 RIGHTBRACKET {: RESULT = new ParExprNode(e,e1); :}
+| expression:e LEFTBRACKET expression:e1 RIGHTBRACKET {: RESULT = new ParExprNode(e,e1); :}
 ;
 
 term ::=
