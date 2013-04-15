@@ -178,28 +178,28 @@ COMMA expression expression_clist2
 expression ::=
 term
 | NOT expression
-| expression:e1 PLUS term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 MINUS term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 OR term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 IN term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 LESSTHAN term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 LESSTHANEQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 GREATERTHAN term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 GREATERTHANEQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 EQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 NOTEQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
-| expression:e1 CONCAT term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+| expression:e PLUS term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e MINUS term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e OR term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e IN term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e LESSTHAN term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e LESSTHANEQUAL term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e GREATERTHAN term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e GREATERTHANEQUAL term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e EQUAL term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e NOTEQUAL term:t
+{: RESULT = new BinExprNode(e,t);:}
+| expression:e CONCAT term:t
+{: RESULT = new BinExprNode(e,t);:}
 | expression LEFTBRACKET expression COLON expression RIGHTBRACKET
 | expression LEFTBRACKET expression COLON RIGHTBRACKET
 | expression LEFTBRACKET COLON expression RIGHTBRACKET
