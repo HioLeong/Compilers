@@ -5,10 +5,10 @@ package ast;
  */
 public abstract class BinaryTermNode extends TermNode {
 
-    protected TermNode lhs; // left-hand side
-    protected FactorNode rhs; // right-hand side
+	protected TermNode lhs;
+	protected FactorNode rhs;
 
-    public BinaryExprNode(TermNode lhs, FactorNode rhs) {
+    public BinaryTermNode(TermNode lhs, FactorNode rhs) {
         this.lhs = lhs;
         this.rhs = rhs;
     }
