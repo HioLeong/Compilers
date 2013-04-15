@@ -57,14 +57,28 @@ global_decl_list block {: System.out.println("Parsing Complete"); :}
 | block {: System.out.println("Parsing Complete"); :}
 ;
 
-global_decl_list ::= 
-global_decl_list global_decl 
-| global_decl;
+global_decl_list:gl ::= 
+global_decl_list:gl global_decl:g 
+{: if (gl != null) {
+                       gl.globalDecs.add(g);
+                       RESULT = new GlobalDeclListNode(gl.globalDecs);
+                   } else {
+                       List<GlobalDeclNode> res = new ArrayList<GlobalDeclNode>();
+                       res.add(g);
+                       RESULT = new GlobalDeclListNode(res);
+                   }
+                :}
+| global_decl
+{: List<GlobalDeclNode> res = new ArrayList<GlobalDeclNode>();
+                   res.add(g);
+                   RESULT = new GlobalDeclListNode(res); :}
+;
+
 
 global_decl ::= 
-datatype_decl
-| var_decl
-| function_decl
+datatype_decl:dd {: RESULT = new GlobalDeclNode(dd); :}
+| var_decl:vd {: RESULT = new GlobalDeclNode(vd); :}
+| function_decl:fd {: RESULT = new GlobalDeclNode(fd); :}
 ;
 
 function_decl ::= 
@@ -112,8 +126,8 @@ COMMA var_type:vt parameter_clist2:pl
 ;
 
 block ::= 
-LEFTBRACE local_decl_list statement_list RIGHTBRACE
-| LEFTBRACE statement_list RIGHTBRACE
+LEFTBRACE local_decl_list:ldl statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(ldl,sl); :}
+| LEFTBRACE statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(null,sl); :}
 ;
 
 // Local declaration only allows variable declarations
