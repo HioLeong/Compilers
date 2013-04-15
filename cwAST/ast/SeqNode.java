@@ -5,7 +5,9 @@ package ast;
  */
 public abstract class SeqNode extends Node {
 
-	public SeqNode(TermNode lhs, FactorNode rhs) {
-        
+	protected List<ExprNode> exprNodes;
+
+	public SeqNode(List<ExprNode> exprNodes) {
+        this.exprNodes = exprNodes;
     }
 }
