@@ -196,13 +196,13 @@ LEFTBRACKET expression_clist:ecl RIGHTBRACKET {: RESULT = new ListSeqNode(ecl); 
 ;
 
 expression_clist ::= 
-expression expression_clist2
-| expression_clist2
+expression:l expression_clist2:r {: RESULT = new ExprList(l,r); :}
+|  {: RESULT = null; :}
 ;
 
 expression_clist2 ::= 
-COMMA expression expression_clist2
-|
+COMMA expression:l expression_clist2:r {: RESULT = new ExprList(l,r);:}
+| {: RESULT = null;:}
 ;
 
 expression ::=
