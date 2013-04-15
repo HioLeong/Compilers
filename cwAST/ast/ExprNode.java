@@ -5,4 +5,5 @@ package ast;
  * alternative to an abstract class.
  */
 public abstract class ExprNode extends Node {
+	
 }

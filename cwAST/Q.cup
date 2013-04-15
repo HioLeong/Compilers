@@ -122,7 +122,7 @@ assignment
 ;
 
 ifelse ::= 
-IF LEFTPAREN expression RIGHTPAREN LEFTBRACE statement_list RIGHTBRACE ELSE LEFTBRACE statement_list RIGHTBRACE
+IF LEFTPAREN expression RIGHTPAREN LEFTBRACE statement_list RIGHTBRACE ELSE LEFTBRACE statement_list RIGHTBRACE {: RESULT = IfElse :}
 ;
 
 while ::=
@@ -179,27 +179,27 @@ expression ::=
 term
 | NOT expression
 | expression:e1 PLUS term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new PlusExprNode(e1,t1);:}
 | expression:e1 MINUS term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new MinusExprNode(e1,t1);:}
 | expression:e1 OR term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new OrExprNode(e1,t1);:}
 | expression:e1 IN term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new InExprNode(e1,t1);:}
 | expression:e1 LESSTHAN term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new LessThanExprNode(e1,t1);:}
 | expression:e1 LESSTHANEQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new LessThanEqualExprNode(e1,t1);:}
 | expression:e1 GREATERTHAN term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new GreaterThanExprNode(e1,t1);:}
 | expression:e1 GREATERTHANEQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new GreaterThanEqualExprNode(e1,t1);:}
 | expression:e1 EQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new EqualExprNode(e1,t1);:}
 | expression:e1 NOTEQUAL term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new NotEqualExprNode(e1,t1);:}
 | expression:e1 CONCAT term:t1
-{: RESULT = new BinExprNode(e1,t1);:}
+{: RESULT = new ConcatExprNode(e1,t1);:}
 | expression LEFTBRACKET expression COLON expression RIGHTBRACKET
 | expression LEFTBRACKET expression COLON RIGHTBRACKET
 | expression LEFTBRACKET COLON expression RIGHTBRACKET
@@ -208,10 +208,10 @@ term
 
 term ::=
 factor
-| term MULTIPLY factor
-| term DIVIDE factor
-| term POWER factor
-| term AND factor
+| term:t MULTIPLY factor:f {: RESULT = new MultiplyTermNode(t,f); :}
+| term:t DIVIDE factor:f {: RESULT = new DivideTermNode(t,f); :}
+| term:t POWER factor:f {: RESULT = new PowerTermNode(t,f); :}
+| term:t AND factor:f {: RESULT = new AndTermNode(t,f); :}
 ;
 
 factor ::=
@@ -226,7 +226,7 @@ MINUS exponent
 
 final ::=
 accessor
-| LEFTPAREN expression RIGHTPAREN
+| LEFTPAREN expression RIGHTPAREN 
 | INTLITERAL
 | FLOATLITERAL
 | BOOLLITERAL
