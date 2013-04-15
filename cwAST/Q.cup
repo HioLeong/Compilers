@@ -1,4 +1,6 @@
 import java_cup.runtime.*;
+import ast.*;
+import java_util.*;
 
 terminal SEMICOLON, COMMA, DOT, COLON;
 terminal LEFTBRACE, RIGHTBRACE;
@@ -109,8 +111,21 @@ local_decl_list var_decl
 ;
 
 statement_list ::= 
-statement statement_list
-|;
+statement:s statement_list:sl
+{: if (sl != null) {
+                       sl.statements.add(s);
+                       RESULT = new StmtListNode(sl.statements);
+                   } else {
+                       List<StmtNode> res = new ArrayList<StmtNode>();
+                       res.add(s);
+                       RESULT = new StmtListNode(res);
+                   }
+                :}
+|statement:sl
+{: List<StmtNode> res = new ArrayList<StmtNode>();
+                   res.add(s);
+                   RESULT = new StmtListNode(res); :}
+                   ;
 
 statement ::= 
 assignment
@@ -122,47 +137,62 @@ assignment
 ;
 
 ifelse ::= 
-IF LEFTPAREN expression RIGHTPAREN LEFTBRACE statement_list RIGHTBRACE ELSE LEFTBRACE statement_list RIGHTBRACE
+IF LEFTPAREN expression:e RIGHTPAREN LEFTBRACE statement_list:sl1 RIGHTBRACE ELSE LEFTBRACE statement_list:sl2 RIGHTBRACE {: RESULT = new IfElseStmtNode(e,sl1,sl2); :}
 ;
 
 while ::=
-WHILE LEFTPAREN expression RIGHTPAREN DO LEFTBRACE statement_list RIGHTBRACE
+WHILE LEFTPAREN expression:e RIGHTPAREN DO LEFTBRACE statement_list:sl RIGHTBRACE 
+                                  {: RESULT = new WhileStmtNode(e,sl); :}
 ;
 
 repeatuntil ::= 
-REPEAT LEFTBRACE statement_list RIGHTBRACE UNTIL LEFTPAREN expression RIGHTPAREN SEMICOLON
+REPEAT LEFTBRACE statement_list:sl RIGHTBRACE UNTIL LEFTPAREN expression:e RIGHTPAREN SEMICOLON
+                                  {: RESULT = new RepeatUntilStmtNode(sl,e); :}  
 ;
 
 function_call ::=
-ID LEFTPAREN expression_clist RIGHTPAREN
+ID LEFTPAREN expression_clist:ecl RIGHTPAREN
+                                 {: RESULT = new FunctionCallStmtNode(ecl); :}  
 ;
 
 return ::= 
-RETURN expression SEMICOLON
-| RETURN SEMICOLON
+RETURN expression:e SEMICOLON {: RESULT = new ReturnTStmtNode(e); :}
+| RETURN SEMICOLON {: RESULT = new ReturnStmtNode(); :} 
 ;
 
 assignment ::= 
-accessor ASSIGN expression SEMICOLON
+accessor:a ASSIGN expression:e SEMICOLON {: RESULT = new AssignStmtNode(a,e); :} 
 ;
 
 sequence ::=
-STRINGLITERAL
+STRINGLITERAL:str {: RESULT = new StringSeqNode(str); :}
 | tuple
 | list
 ;
 
 accessor ::= 
-ID
-| accessor DOT ID
+ID:name 
+{: List<IdNode> res = new ArrayList<IdNode>();
+                   res.add(name);
+                   RESULT = new AccessNode(res); :}
+| accessor:a DOT ID:name 
+{: if (a != null) {
+                       a.ids.add(name);
+                       RESULT = new AccessNode(a.ids);
+                   } else {
+                       List<IdNode> res = new ArrayList<IdNode>();
+                       res.add(name);
+                       RESULT = new IdNode(res);
+                   }
+                :}
 ;
 
-tuple ::=
-LEFTTBRACKET expression_clist RIGHTTBRACKET
+tuple ::= 
+LEFTTBRACKET expression_clist:ecl RIGHTTBRACKET {: RESULT = new TupleSeqNode(ecl); :}
 ;
 
 list ::= 
-LEFTBRACKET expression_clist RIGHTBRACKET
+LEFTBRACKET expression_clist:ecl RIGHTBRACKET {: RESULT = new ListSeqNode(ecl); :}
 ;
 
 expression_clist ::= 
