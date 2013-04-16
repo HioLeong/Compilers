@@ -283,7 +283,7 @@ factor
 ;
 
 factor ::=
-exponent:e POWER factor:f {:RESULT = new FactorNode(e,f);:}
+exponent:e POWER factor:f {:RESULT = new BinaryFactorNode(e,f);:}
 | exponent:e {: RESULT = new ExponentNode(e); :}
 ;
 
