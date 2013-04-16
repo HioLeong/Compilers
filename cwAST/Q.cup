@@ -94,7 +94,8 @@ var_type:vt var_init:vi SEMICOLON {: RESULT = new VarDeclNode(vt,vi); :};
 
 var_init ::=
 ASSIGN expression_clist:el {: RESULT = new VarInitNode(el); :}
-|;
+|{: RESULT = null; :}
+;
 
 datatype_decl ::=
 TDEF ID COLON parameter_clist:pl SEMICOLON {: RESULT = new DataTypeDeclNode(pl); :}
@@ -107,7 +108,8 @@ VOID
 //two-productions are needed to avoid ambiguity
 parameter_clist ::= 
 var_type:vt parameter_clist2:pl {: RESULT = new ParameterListNode(vt,pl); :}
-|;
+|{: RESULT = null; :}
+;
 
 parameter_clist2 ::= 
 COMMA var_type:vt parameter_clist2:pl 
@@ -123,6 +125,7 @@ COMMA var_type:vt parameter_clist2:pl
                        RESULT = new ParameterListSNode(types,lists);
                    }
                 :}
+|{: RESULT = null; :}
 ;
 
 block ::= 
@@ -159,11 +162,8 @@ statement:s statement_list:sl
                        RESULT = new StmtListNode(res);
                    }
                 :}
-|statement:sl
-{: List<StmtNode> res = new ArrayList<StmtNode>();
-                   res.add(s);
-                   RESULT = new StmtListNode(res); :}
-                   ;
+|{: RESULT = null; :}
+;
 
 statement ::= 
 assignment
@@ -194,8 +194,8 @@ ID LEFTPAREN expression_clist:ecl RIGHTPAREN
 ;
 
 return ::= 
-RETURN expression:e SEMICOLON {: RESULT = new ReturnTStmtNode(e); :}
-| RETURN SEMICOLON {: RESULT = new ReturnStmtNode(); :} 
+RETURN expression:e SEMICOLON {: RESULT = new ReturnStmtNode(e); :}
+| RETURN SEMICOLON {: RESULT = new ReturnStmtNode(null); :} 
 ;
 
 assignment ::= 
@@ -234,12 +234,21 @@ LEFTBRACKET expression_clist:ecl RIGHTBRACKET {: RESULT = new ListSeqNode(ecl); 
 ;
 
 expression_clist ::= 
-expression:l expression_clist2:r {: RESULT = new ExprList(l,r); :}
+expression:e expression_clist2:el {: RESULT = new ExprListNode(e,el); :}
 |  {: RESULT = null; :}
 ;
 
 expression_clist2 ::= 
-COMMA expression:l expression_clist2:r {: RESULT = new ExprList(l,r);:}
+COMMA expression:e expression_clist2:el
+{: if (el != null) {
+                       el.expressions.add(e);
+                       RESULT = new ExprListSNode(el.expressions);
+                   } else {
+                       List<ExprNode> list = new ArrayList<ExprNode>();
+                       list.add(e);
+                       RESULT = new ExprListSNode(list);
+                   }
+                :}
 | {: RESULT = null;:}
 ;
 
