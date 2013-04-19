@@ -131,7 +131,8 @@ COMMA var_type:vt parameter_clist2:pl
 
 block ::= 
 LEFTBRACE local_decl_list:ldl statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(ldl,sl); :}
-| LEFTBRACE statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(null,sl); :}
+| LEFTBRACE statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(
+  sl); :}
 ;
 
 // Local declaration only allows variable declarations
@@ -176,31 +177,31 @@ assignment
 ;
 
 ifelse ::= 
-IF LEFTPAREN expression:e RIGHTPAREN LEFTBRACE statement_list:sl1 RIGHTBRACE ELSE LEFTBRACE statement_list:sl2 RIGHTBRACE {: RESULT = new IfElseStmtNode(e,sl1,sl2); :}
+IF LEFTPAREN expression:condition RIGHTPAREN LEFTBRACE statement_list:ifbody RIGHTBRACE ELSE LEFTBRACE statement_list:elsebody RIGHTBRACE {: RESULT = new IfElseStmtNode(condition,ifbody,elsebody); :}
 ;
 
 while ::=
-WHILE LEFTPAREN expression:e RIGHTPAREN DO LEFTBRACE statement_list:sl RIGHTBRACE 
-                                  {: RESULT = new WhileStmtNode(e,sl); :}
+WHILE LEFTPAREN expression:condition RIGHTPAREN DO LEFTBRACE statement_list:body RIGHTBRACE 
+                                  {: RESULT = new WhileStmtNode(condition,body); :}
 ;
 
 repeatuntil ::= 
-REPEAT LEFTBRACE statement_list:sl RIGHTBRACE UNTIL LEFTPAREN expression:e RIGHTPAREN SEMICOLON
-                                  {: RESULT = new RepeatUntilStmtNode(sl,e); :}  
+REPEAT LEFTBRACE statement_list:body RIGHTBRACE UNTIL LEFTPAREN expression:condition RIGHTPAREN SEMICOLON
+                                  {: RESULT = new RepeatUntilStmtNode(body,condition); :}  
 ;
 
 function_call ::=
-ID LEFTPAREN expression_clist:ecl RIGHTPAREN
-                                 {: RESULT = new FunctionCallStmtNode(ecl); :}  
+ID LEFTPAREN expression_clist:parameters RIGHTPAREN
+                                 {: RESULT = new FunctionCallStmtNode(parameters); :}  
 ;
 
 return ::= 
 RETURN expression:e SEMICOLON {: RESULT = new ReturnStmtNode(e); :}
-| RETURN SEMICOLON {: RESULT = new ReturnStmtNode(null); :} 
+| RETURN SEMICOLON {: RESULT = new ReturnStmtNode(); :} 
 ;
 
 assignment ::= 
-accessor:a ASSIGN expression:e SEMICOLON {: RESULT = new AssignStmtNode(a,e); :} 
+accessor:a ASSIGN expression:rhs SEMICOLON {: RESULT = new AssignStmtNode(a,rhs); :} 
 ;
 
 sequence ::=

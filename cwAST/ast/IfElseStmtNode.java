@@ -2,13 +2,13 @@ package ast;
 
 public class IfElseStmtNode extends StmtNode {
 
-	protected ExprNode exprNode;
-	protected StmtList ifStmtlist;
-	protected StmtList elseStmtList;
+	protected ExprNode condition;
+	protected StmtList ifbody;
+	protected StmtList elsebody;
 
-    public IfElseStmtNode(ExprNode exprNode, StmtList ifStmtList, StmtList elseStmtList) {
-    	this.exprNode = exprNode;
-    	this.ifStmtlist = ifStmtlist;
-    	this.elseStmtList = elseStmtList;
+    public IfElseStmtNode(ExprNode condition, StmtList ifbody, StmtList elsebody) {
+    	this.condition = condition;
+    	this.ifbody = ifbody;
+    	this.elsebody = elsebody;
     }
 }
