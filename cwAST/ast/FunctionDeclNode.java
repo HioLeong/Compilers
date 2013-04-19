@@ -2,15 +2,15 @@ package ast;
 
 import java.util.List;
 
-public class FunctionDeclNode extends Node {
+public class FunctionDeclNode extends GlobalDeclNode {
 
-	ParameterListNode pl;
-	String ft;
-	BlockNode b;
+	protected ParameterListNode pl;
+	protected String ft;
+	protected BlockNode b;
     public FunctionDeclNode(ParameterListNode pl, String ft,BlockNode b) {
     	this.b=b;
     	this.ft=ft;
-    	this.pl=pl
+    	this.pl=pl;
     }  
 
 

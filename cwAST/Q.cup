@@ -77,9 +77,9 @@ global_decl_list:gl global_decl:g
 
 
 global_decl ::= 
-datatype_decl:dd {: RESULT = new GlobalDeclNode(dd); :}
-| var_decl:vd {: RESULT = new GlobalDeclNode(vd); :}
-| function_decl:fd {: RESULT = new GlobalDeclNode(fd); :}
+datatype_decl:dd 
+| var_decl:vd 
+| function_decl:fd 
 ;
 
 function_decl ::= 
@@ -116,8 +116,8 @@ parameter_clist2 ::=
 COMMA var_type:vt parameter_clist2:pl 
 {: if (pl != null) {
                        pl.varTypes.add(vt);
-                       pl.parameterLists.add(pl);
-                       RESULT = new ParameterListSNode(pl.varTypes,pl.parameterLists);
+                       pl.lists.add(pl);
+                       RESULT = new ParameterListSNode(pl.varTypes,pl.lists);
                    } else {
                        List<VarTypeNode> types = new ArrayList<VarTypeNode>();
                        List<ParameterListSNode> lists = new ArrayList<ParameterListSNode>();
