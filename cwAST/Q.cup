@@ -253,7 +253,6 @@ COMMA expression:e expression_clist2:el
                 :}
 | {: RESULT = null;:}
 ;
-
 expression ::=
 term
 | NOT expression
