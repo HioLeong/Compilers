@@ -1,9 +1,6 @@
 package ast;
 
-/**
- * For this class, an interface would not make much sense any more. ;)
- */
-public abstract class FactorNode extends BinaryTermNode {
+public class FactorNode extends BinaryTermNode {
 	ExponentNode lhs;
 	FactorNode rhs;
 
