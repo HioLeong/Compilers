@@ -24,7 +24,8 @@ class Q extends Parent implements Interface {
 terminal IF, ELSE, REPEAT, UNTIL, RETURN, DO, WHILE;
 
 non terminal type;
-non terminal expression, term, factor, exponent, final, accessor;
+non terminal ExprNode expression;
+non terminal term, factor, exponent, final, accessor;
 non terminal sequence, list, tuple;
 non terminal expression_clist, expression_clist2;
 non terminal var_decl, var_type, var_init;
