@@ -131,8 +131,7 @@ COMMA var_type:vt parameter_clist2:pl
 
 block ::= 
 LEFTBRACE local_decl_list:ldl statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(ldl,sl); :}
-| LEFTBRACE statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(
-  sl); :}
+| LEFTBRACE statement_list:sl RIGHTBRACE {: RESULT = new BlockNode(sl); :}
 ;
 
 // Local declaration only allows variable declarations
