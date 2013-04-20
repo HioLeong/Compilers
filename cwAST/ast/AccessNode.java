@@ -1,8 +1,6 @@
 package ast;
 import java.util.List;
 
-import java.util.List;
-
 public class AccessNode extends Node {
 
     public List<IdNode> ids; 

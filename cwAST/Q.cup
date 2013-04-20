@@ -1,6 +1,8 @@
 import java_cup.runtime.*;
 import ast.*;
-import java_util.*;
+import java.util.*;
+import java.util.List;
+
 
 terminal SEMICOLON, COMMA, DOT, COLON;
 terminal LEFTBRACE, RIGHTBRACE;
@@ -18,9 +20,9 @@ terminal NOT, OR, AND;
 terminal PLUS, MINUS, MULTIPLY, DIVIDE, POWER;
 terminal IN, LENGTH, CONCAT;
 terminal LESSTHAN, LESSTHANEQUAL, GREATERTHAN, GREATERTHANEQUAL, EQUAL, NOTEQUAL;
-class Q extends Parent implements Interface {
+/*class Q extends Parent implements Interface {
 	
-}
+}*/
 terminal IF, ELSE, REPEAT, UNTIL, RETURN, DO, WHILE;
 
 non terminal type;
@@ -58,11 +60,11 @@ global_decl_list block {: System.out.println("Parsing Complete"); :}
 | block {: System.out.println("Parsing Complete"); :}
 ;
 
-global_decl_list:gl ::= 
+global_decl_list::= 
 global_decl_list:gl global_decl:g 
 {: if (gl != null) {
-                       gl.globalDecs.add(g);
-                       RESULT = new GlobalDeclListNode(gl.globalDecs);
+                       gl.statements.add(g);
+                       RESULT = new GlobalDeclListNode(gl.statements);
                    } else {
                        List<GlobalDeclNode> res = new ArrayList<GlobalDeclNode>();
                        res.add(g);
