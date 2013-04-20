@@ -11,7 +11,12 @@ terminal LEFTTBRACKET, RIGHTTBRACKET;
 terminal LEFTPAREN, RIGHTPAREN;
 
 terminal BOOL, INT, FLOAT, STRING, LIST, CHAR, TUPLE, VOID;
-terminal String ID, BOOLLITERAL, INTLITERAL, FLOATLITERAL, STRINGLITERAL, CHARLITERAL;
+terminal String ID;
+terminal Boolean BOOLLITERAL;
+terminal Integer INTLITERAL;
+terminal Float FLOATLITERAL;
+terminal String STRINGLITERAL;
+terminal Character CHARLITERAL;
 
 terminal FDEF, TDEF;
 
