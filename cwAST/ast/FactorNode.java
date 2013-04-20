@@ -8,7 +8,7 @@ public abstract class FactorNode extends TermNode {
     protected TermNode lhs; // left-hand side
     protected FactorNode rhs; // right-hand side
 
-    public BinaryExprNode(TermNode lhs, FactorNode rhs) {
+    public FactorNode(TermNode lhs, FactorNode rhs) {
         this.lhs = lhs;
         this.rhs = rhs;
     }
