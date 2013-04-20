@@ -1,5 +1,11 @@
 package ast;
 
-public abstract class ExponentNode extends Node {
+public class ExponentNode extends Node {
+	
+	private Node node;
+	
+	public ExponentNode(Node node) {
+		
+	}
 	
 }
