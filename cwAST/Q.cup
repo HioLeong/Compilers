@@ -135,14 +135,14 @@ var_type:vt parameter_clist2:pl {: RESULT = new ParameterListNode(vt,pl); :}
 parameter_clist2 ::= 
 COMMA var_type:vt parameter_clist2:pl 
 {: if (pl != null) {
-                       pl.parameters.add(vt);
-                       RESULT = new ParameterListNode(pl.parameters);
-                   } else {
-                       List<ParameterNode> params = new ArrayList<ParameterNode>();
-                       params.add(vt);
-                       RESULT = new ParameterListNode(params);
-                   }
-                :}
+pl.varTypes.add(vt);
+RESULT = new ParameterListSNode(pl.varTypes);
+} else {
+List<VarTypeNode> types = new ArrayList<VarTypeNode>();
+types.add(vt);
+RESULT = new ParameterListSNode(types);
+}
+:}
 |{: RESULT = null; :}
 ;
 
