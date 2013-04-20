@@ -97,9 +97,9 @@ global_decl_list:gl global_decl:g
 
 
 global_decl ::= 
-datatype_decl:dd {:RESULT = new GlobalDeclNode(dd);:}
-| var_decl:vd {:RESULT = new VarTypeNode();:}
-| function_decl:fd {:RESULT = new VarTypeNode(name,t);:}
+datatype_decl:dd 
+| var_decl:vd 
+| function_decl:fd 
 ;
 
 function_decl ::= 
