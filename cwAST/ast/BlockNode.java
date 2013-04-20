@@ -4,8 +4,8 @@ import java.util.List;
 
 public class BlockNode extends Node {
 
-	protected LocalDeclListNode ldl;
-	protected StmtListNode sl;
+	public LocalDeclListNode ldl;
+	public StmtListNode sl;
 	
     public BlockNode(LocalDeclListNode ldl, StmtListNode sl) {
     	this.ldl=ldl;

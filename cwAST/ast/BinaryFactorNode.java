@@ -1,8 +1,9 @@
 package ast;
 
 public class BinaryFactorNode extends Node {
-	ExponentNode lhs;
-	FactorNode rhs;
+	
+	public ExponentNode lhs;
+	public FactorNode rhs;
 
 	public BinaryFactorNode(ExponentNode lhs, FactorNode rhs){
 		this.lhs=lhs;

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class FunctionDeclNode extends GlobalDeclNode {
 
-	protected ParameterListNode pl;
-	protected String ft;
-	protected BlockNode b;
+	public ParameterListNode pl;
+	public String ft;
+	public BlockNode b;
 	
     public FunctionDeclNode(ParameterListNode pl, String ft,BlockNode b) {
     	this.b=b;

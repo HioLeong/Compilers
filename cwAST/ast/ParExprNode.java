@@ -3,9 +3,9 @@ package ast;
 public class ParExprNode extends ExprNode {
 
 
-	protected ExprNode expr1; 
-	protected ExprNode expr2;
-	protected ExprNode expr3;
+	public ExprNode expr1; 
+	public ExprNode expr2;
+	public ExprNode expr3;
     
     public ParExprNode(ExprNode expr1, ExprNode expr2) {
        this.expr1=expr1;

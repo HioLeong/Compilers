@@ -5,8 +5,8 @@ package ast;
  */
 public abstract class BinaryExprNode extends ExprNode {
 
-    protected ExprNode lhs; // left-hand side
-    protected TermNode rhs; // right-hand side
+    public ExprNode lhs; // left-hand side
+    public TermNode rhs; // right-hand side
 
     public BinaryExprNode(ExprNode lhs, TermNode rhs) {
         this.lhs = lhs;

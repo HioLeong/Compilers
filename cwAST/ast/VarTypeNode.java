@@ -4,8 +4,8 @@ import java.util.List;
 
 public class VarTypeNode extends Node {
 
-	protected String id;
-	protected String type;
+	public String id;
+	public String type;
 
     public VarTypeNode(String id,String type) {
     	this.id=id;
