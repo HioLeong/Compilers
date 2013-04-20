@@ -29,7 +29,9 @@ non terminal String type;
 non terminal ExprNode expression;
 //this line I don't know the type for some 
 non terminal TermNode term;
-non terminal factor, exponent, final;
+non terminal FactorNode factor;
+non terminal ExponentNode exponent;
+non terminal final;
 non terminal AccessNode accessor;
 non terminal SequenceNode sequence;
 non terminal ListSeqNode list;
