@@ -1,6 +1,6 @@
 package ast;
 
-public abstract class ParExprNode extends ExprNode {
+public class ParExprNode extends ExprNode {
 
 
 	protected ExprNode expr1; 

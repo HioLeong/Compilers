@@ -28,7 +28,8 @@ terminal IF, ELSE, REPEAT, UNTIL, RETURN, DO, WHILE;
 non terminal String type;
 non terminal ExprNode expression;
 //this line I don't know the type for some 
-non terminal term, factor, exponent, final;
+non terminal TermNode term;
+non terminal factor, exponent, final;
 non terminal AccessNode accessor;
 non terminal SequenceNode sequence;
 non terminal ListSeqNode list;
@@ -315,7 +316,7 @@ exponent:e POWER factor:f {:RESULT = new BinaryFactorNode(e,f);:}
 
 exponent ::=
 MINUS exponent:e {: RESULT = e; :} // Need to sort out minus
-| final:f {: RESULT = new ExponentNode(f) :}
+| final:f {: RESULT = new ExponentNode(f); :}
 ;
 
 final ::=
