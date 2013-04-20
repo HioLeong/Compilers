@@ -292,22 +292,22 @@ factor
 
 factor ::=
 exponent:e POWER factor:f {:RESULT = new BinaryFactorNode(e,f);:}
-| exponent:e {: RESULT = new ExponentNode(e); :}
+| exponent:e {: RESULT = e; :}
 ;
 
 exponent ::=
-MINUS exponent 
-| final
+MINUS exponent:e {: RESULT = e; :} // Need to sort out minus
+| final:f {: RESULT = new ExponentNode(f) :}
 ;
 
 final ::=
-accessor
-| LEFTPAREN expression RIGHTPAREN 
-| INTLITERAL
-| FLOATLITERAL
-| BOOLLITERAL
-| CHARLITERAL
-| function_call
-| LENGTH LEFTPAREN expression RIGHTPAREN
-| sequence // This includes STRINGLITERAL
+accessor:a {: RESULT = a; :}
+| LEFTPAREN expression:e RIGHTPAREN {: RESULT = e; :}
+| INTLITERAL:i {: RESULT = new IntLiteralNode(i); :}
+| FLOATLITERAL:f {: RESULT = new FloatLiteralNode(f); :}
+| BOOLLITERAL:b {: RESULT = new BoolLiteralNode(b); :}
+| CHARLITERAL:c {: RESULT = new CharLiteralNode(c); :}
+| function_call:fc {: RESULT = fc; :}
+| LENGTH LEFTPAREN expression:e RIGHTPAREN {: RESULT = LengthFunctionNode(e); :}
+| sequence:s {: RESULT = s; :} // This includes STRINGLITERAL
 ;
