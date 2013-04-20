@@ -6,6 +6,7 @@ public class BlockNode extends Node {
 
 	protected LocalDeclListNode ldl;
 	protected StmtListNode sl;
+	
     public BlockNode(LocalDeclListNode ldl, StmtListNode sl) {
     	this.ldl=ldl;
     	this.sl=sl;

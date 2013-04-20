@@ -11,7 +11,7 @@ terminal LEFTTBRACKET, RIGHTTBRACKET;
 terminal LEFTPAREN, RIGHTPAREN;
 
 terminal BOOL, INT, FLOAT, STRING, LIST, CHAR, TUPLE, VOID;
-terminal ID, BOOLLITERAL, INTLITERAL, FLOATLITERAL, STRINGLITERAL, CHARLITERAL;
+terminal String ID, BOOLLITERAL, INTLITERAL, FLOATLITERAL, STRINGLITERAL, CHARLITERAL;
 
 terminal FDEF, TDEF;
 
@@ -25,21 +25,39 @@ terminal LESSTHAN, LESSTHANEQUAL, GREATERTHAN, GREATERTHANEQUAL, EQUAL, NOTEQUAL
 }*/
 terminal IF, ELSE, REPEAT, UNTIL, RETURN, DO, WHILE;
 
-non terminal type;
-non terminal expression;
-non terminal term, factor, exponent, final, accessor;
-non terminal sequence, list, tuple;
-non terminal expression_clist, expression_clist2;
-non terminal var_decl, var_type, var_init;
+non terminal String type;
+non terminal ExprNode expression;
+//this line I don't know the type for some 
+non terminal term, factor, exponent, final;
+non terminal AccessNode accessor;
+non terminal SequenceNode sequence;
+non terminal ListSeqNode list;
+non terminal TupleSeqNode tuple;
+non terminal ExprListNode expression_clist;
+non terminal ExprListSNode expression_clist2;
+non terminal VarDeclNode var_decl;
+non terminal VarTypeNode var_type;
+non terminal VarInitNode var_init;
 
-non terminal function_type, function_decl;
-non terminal parameter_clist, parameter_clist2;
+non terminal String function_type;
+non terminal FunctionDeclNode function_decl;
+non terminal ParameterListNode parameter_clist;
+non terminal ParameterListSNode parameter_clist2;
 
-non terminal global_decl_list, global_decl, local_decl_list;
-non terminal datatype_decl;
+non terminal GlobalDeclListNode global_decl_list;
+non terminal GlobalDeclNode global_decl;
+non terminal LocalDeclListNode local_decl_list;
+non terminal DataTypeDeclNode datatype_decl;
 
-non terminal block, statement_list, statement;
-non terminal ifelse, repeatuntil, while, assignment, function_call, return;
+non terminal BlockNode block;
+non terminal StmtListNode statement_list;
+non terminal StmtNode statement;
+non terminal IfElseStmtNode ifelse;
+non terminal RepeatUntilStmtNode repeatuntil;
+non terminal WhileStmtNode while;
+non terminal AssignStmtNode assignment;
+non terminal FunctionCallStmtNode function_call;
+non terminal ReturnStmtNode return;
 non terminal program;
 
 precedence right POWER;
@@ -71,7 +89,7 @@ global_decl_list:gl global_decl:g
                        RESULT = new GlobalDeclListNode(res);
                    }
                 :}
-| global_decl
+| global_decl:g
 {: List<GlobalDeclNode> res = new ArrayList<GlobalDeclNode>();
                    res.add(g);
                    RESULT = new GlobalDeclListNode(res); :}
@@ -79,9 +97,9 @@ global_decl_list:gl global_decl:g
 
 
 global_decl ::= 
-datatype_decl:dd 
-| var_decl:vd 
-| function_decl:fd 
+datatype_decl:dd {:RESULT = new GlobalDeclNode(dd);:}
+| var_decl:vd {:RESULT = new VarTypeNode();:}
+| function_decl:fd {:RESULT = new VarTypeNode(name,t);:}
 ;
 
 function_decl ::= 
