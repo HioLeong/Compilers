@@ -23,8 +23,8 @@ class Q extends Parent implements Interface {
 }
 terminal IF, ELSE, REPEAT, UNTIL, RETURN, DO, WHILE;
 
-non terminal TermNode type;
-non terminal ExprNode expression;
+non terminal type;
+non terminal expression;
 non terminal term, factor, exponent, final, accessor;
 non terminal sequence, list, tuple;
 non terminal expression_clist, expression_clist2;
@@ -115,15 +115,12 @@ var_type:vt parameter_clist2:pl {: RESULT = new ParameterListNode(vt,pl); :}
 parameter_clist2 ::= 
 COMMA var_type:vt parameter_clist2:pl 
 {: if (pl != null) {
-                       pl.varTypes.add(vt);
-                       pl.lists.add(pl);
-                       RESULT = new ParameterListSNode(pl.varTypes,pl.lists);
+                       pl.parameters.add(vt);
+                       RESULT = new ParameterListNode(pl.parameters);
                    } else {
-                       List<VarTypeNode> types = new ArrayList<VarTypeNode>();
-                       List<ParameterListSNode> lists = new ArrayList<ParameterListSNode>();
-                       types.add(vt);
-                       lists.add(pl);
-                       RESULT = new ParameterListSNode(types,lists);
+                       List<ParameterNode> params = new ArrayList<ParameterNode>();
+                       params.add(vt);
+                       RESULT = new ParameterListNode(params);
                    }
                 :}
 |{: RESULT = null; :}

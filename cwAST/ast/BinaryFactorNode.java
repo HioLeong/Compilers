@@ -1,15 +1,11 @@
 package ast;
 
-/**
- * For this class, an interface would not make much sense any more. ;)
- */
-public abstract class BinaryFactorNode extends TermNode {
+public class BinaryFactorNode extends Node {
+	ExponentNode lhs;
+	FactorNode rhs;
 
-    protected TermNode lhs; // left-hand side
-    protected FactorNode rhs; // right-hand side
-
-    public BinaryFactorNode(TermNode lhs, FactorNode rhs) {
-        this.lhs = lhs;
-        this.rhs = rhs;
-    }
+	public BinaryFactorNode(ExponentNode lhs, FactorNode rhs){
+		this.lhs=lhs;
+		this.rhs=rhs;
+	}	
 }
