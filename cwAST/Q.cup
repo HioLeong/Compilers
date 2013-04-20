@@ -238,7 +238,7 @@ ID:name
                    } else {
                        List<IdNode> res = new ArrayList<IdNode>();
                        res.add(new IdNode(name));
-                       RESULT = new IdNode(res);
+                       RESULT = new AccessNode(res);
                    }
                 :}
 ;
