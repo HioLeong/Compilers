@@ -317,12 +317,12 @@ factor
 ;
 
 factor ::=
-exponent:e POWER factor:f {:RESULT = new BinaryFactorNode(e,f);:}
-| exponent:e {: RESULT = e; :}
+exponent:e POWER factor:f {:RESULT = new FactorNode(e,f);:}
+| exponent:e {: RESULT = new ExponentNode(e); :}
 ;
 
 exponent ::=
-MINUS exponent:e {: RESULT = e; :} // Need to sort out minus
+MINUS exponent:e {: RESULT =ExponentNode(e); :} // Need to sort out minus
 | final:f {: RESULT = new ExponentNode(f); :}
 ;
 
