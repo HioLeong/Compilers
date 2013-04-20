@@ -1,7 +1,7 @@
 package ast;
 
 
-public class TupleSeqNode extends SequenceNode {
+public class TupleSeqNode extends SeqNode {
 	public TupleSeqNode(ExprListNode exprlist){
 		super(exprlist);
 	}

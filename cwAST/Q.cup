@@ -36,7 +36,7 @@ non terminal ExprNode expression;
 non terminal TermNode term;
 non terminal FactorNode factor;
 non terminal ExponentNode exponent;
-non terminal final;
+non terminal Node final;
 non terminal AccessNode accessor;
 non terminal SequenceNode sequence;
 non terminal ListSeqNode list;
@@ -318,22 +318,22 @@ factor
 
 factor ::=
 exponent:e POWER factor:f {:RESULT = new FactorNode(e,f);:}
-| exponent:e {: RESULT = new ExponentNode(e); :}
+| exponent:e {: RESULT = new FactorNode(e,null); :}
 ;
 
 exponent ::=
-MINUS exponent:e {: RESULT =ExponentNode(e); :} // Need to sort out minus
+MINUS exponent:e {: RESULT =new ExponentNode(e); :} // Need to sort out minus
 | final:f {: RESULT = new ExponentNode(f); :}
 ;
 
 final ::=
 accessor:a {: RESULT = a; :}
-| LEFTPAREN expression:e RIGHTPAREN {: RESULT = e; :}
+| LEFTPAREN expression:e RIGHTPAREN
 | INTLITERAL:i {: RESULT = new IntLiteralNode(i); :}
 | FLOATLITERAL:f {: RESULT = new FloatLiteralNode(f); :}
 | BOOLLITERAL:b {: RESULT = new BoolLiteralNode(b); :}
 | CHARLITERAL:c {: RESULT = new CharLiteralNode(c); :}
-| function_call:fc {: RESULT = fc; :}
-| LENGTH LEFTPAREN expression:e RIGHTPAREN {: RESULT = LengthFunctionNode(e); :}
-| sequence:s {: RESULT = s; :} // This includes STRINGLITERAL
+| function_call:fc 
+| LENGTH LEFTPAREN expression:e RIGHTPAREN {: RESULT = new LengthFunctionNode(e); :}
+| sequence:s // This includes STRINGLITERAL
 ;
