@@ -5,9 +5,9 @@ package ast;
  */
 public abstract class SeqNode extends Node {
 
-	protected ExprList exprList;
+	protected ExprListNode exprList;
 
-	public SeqNode(ExprList exprList) {
-        this.exprNodes = exprNodes;
-    }
+	public SeqNode(ExprListNode exprList) {
+		this.exprList = exprList;
+	}
 }

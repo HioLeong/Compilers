@@ -1,8 +1,8 @@
 package ast;
 
-public class ListSeqNode extends SequenceNode {
+public class ListSeqNode extends SeqNode {
 
-    public ListSeqNode(ExprList exprList) {
+    public ListSeqNode(ExprListNode exprList) {
        	super(exprList);
     }
 }
