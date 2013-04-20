@@ -154,7 +154,7 @@ LEFTBRACE local_decl_list:ldl statement_list:sl RIGHTBRACE {: RESULT = new Block
 // Local declaration only allows variable declarations
 local_decl_list ::= 
 local_decl_list:ldl var_decl:vd
-{: if (sl != null) {
+{: if (ldl != null) {
                        ldl.varDecls.add(vd);
                        RESULT = new LocalDeclListNode(ldl.varDecls);
                    } else {
