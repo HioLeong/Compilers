@@ -37,6 +37,25 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(MultiplyTermNode node) {
+				if(node.lhs != null){
+			node.lhs.accept(this);
+		}
+		if(node.rhs != null){
+			node.rhs.accept(this);
+		}
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
+			node.type=FLOAT;
+		}
+		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+			node.type=INT;
+		}
+		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+			node.type=FLOAT;
+		}
+		if(!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+			
+		}
 		return null;
 	}
 
@@ -48,13 +67,49 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(DivideTermNode node) {
-		// TODO Auto-generated method stub
+				if(node.lhs != null){
+			node.lhs.accept(this);
+		}
+		if(node.rhs != null){
+			node.rhs.accept(this);
+		}
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
+			node.type=FLOAT;
+		}
+		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+			node.type=INT;
+		}
+		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+			node.type=FLOAT;
+		}
+		if(!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(PowerTermNode node) {
-		// TODO Auto-generated method stub
+				if(node.lhs != null){
+			node.lhs.accept(this);
+		}
+		if(node.rhs != null){
+			node.rhs.accept(this);
+		}
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
+			node.type=FLOAT;
+		}
+		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+			node.type=INT;
+		}
+		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+			node.type=FLOAT;
+		}
+		if(!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+			
+		}
 		return null;
 	}
 
@@ -208,16 +263,25 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(MinusExprNode node) {
-		if (node.lhs != null) {
+				if(node.lhs != null){
 			node.lhs.accept(this);
 		}
-		if (node.rhs != null) {
-			node.lhs.accept(this);
+		if(node.rhs != null){
+			node.rhs.accept(this);
 		}
-
-		// TODO: Add Type Checking
-		// TODO: Add Node Type
-
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
+			node.type=FLOAT;
+		}
+		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+			node.type=INT;
+		}
+		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+			node.type=FLOAT;
+		}
+		if(!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+			
+		}
 		return null;
 	}
 
@@ -253,16 +317,25 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(PlusExprNode node) {
-		if (node.lhs != null) {
+				if(node.lhs != null){
 			node.lhs.accept(this);
 		}
-		if (node.rhs != null) {
-			node.lhs.accept(this);
+		if(node.rhs != null){
+			node.rhs.accept(this);
 		}
-
-		// TODO: Add Type Checking
-		// TODO: Add Node Type
-
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
+			node.type=FLOAT;
+		}
+		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+			node.type=INT;
+		}
+		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+			node.type=FLOAT;
+		}
+		if(!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+			
+		}
 		return null;
 	}
 
