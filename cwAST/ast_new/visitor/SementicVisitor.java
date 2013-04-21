@@ -1,4 +1,4 @@
-package visitor;
+	package visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -814,6 +814,43 @@ public class SementicVisitor implements Visitor {
 	@Override
 	public Object visit(IdNode node) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(FunctionDeclNode node) {
+		table = table.beginScope();
+		Symbol functionSymbol = new Symbol();
+
+		if (!table.lookup(node.id)) {
+			reportError("The function name " + node.id + " already exists.");
+			return false;
+		}
+
+		functionSymbol.setId(node.id);
+		functionSymbol.setKind(Kind.METHOD);
+		List<VarTypeNode> varTypeNodes = new ArrayList<VarTypeNode>();
+
+		for (VarTypeNode varType : node.pl.parameterListSNode.varTypes) {
+			Symbol symbol = new Symbol();
+			symbol.setId(varType.id);
+			symbol.setKind(Kind.ARGS);
+			List<VarTypeNode> types = new ArrayList<VarTypeNode>();
+			types.add(varType);
+			table.put(symbol);
+		}
+
+		varTypeNodes.addAll(node.pl.parameterListSNode.varTypes);
+
+		table = table.endScope();
+
+		VarTypeNode methodTypeNode = new VarTypeNode(node.id, node.ft);
+		varTypeNodes.add(methodTypeNode);
+
+		functionSymbol.setTypes(varTypeNodes);
+
+		table.put(functionSymbol);
+
 		return null;
 	}
 

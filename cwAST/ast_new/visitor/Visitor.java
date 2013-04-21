@@ -95,6 +95,7 @@ public interface Visitor {
 	public Object visit(GlobalDeclListNode node);
 	public Object visit(LocalDeclListNode node);
 	public Object visit(LengthFunctionNode node);
+	public Object visit(FunctionDeclNode node);
 	public Object visit(ParameterListNode node);
 	public Object visit(DataTypeDeclNode node);
 	public Object visit(VarDeclNode node);
