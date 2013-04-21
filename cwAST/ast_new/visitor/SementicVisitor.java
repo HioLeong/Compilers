@@ -175,8 +175,7 @@ public class SementicVisitor implements Visitor {
 			System.out.println("Type error found: " + node.lhs.type
 					+ " does not match " + node.rhs.type);
 		} else {
-			System.out
-					.println("Type error found: Incorrect types for power operation.");
+			System.out.println("Type error found: Incorrect types for power operation.");
 		}
 		return null;
 	}
@@ -708,13 +707,36 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(ExponentNode node) {
-		// TODO Auto-generated method stub
+		if(node!=null){
+			node.accept(this);
+		}
+		if(!(node.type.equals(INT)||node.type.equals(FLOAT))){
+			System.out.println("Type error found: Exponent type of "+node.type);
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(FactorNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.rhs.accept(this);
+		}
+		if ((node.lhs.type.equals(INT) && node.rhs.type.equals(FLOAT))
+				|| (node.lhs.type.equals(FLOAT) && node.rhs.type.equals(INT))) {
+			node.type = FLOAT;
+		} else if (node.lhs.type.equals(INT) && node.rhs.type.equals(INT)) {
+			node.type = INT;
+		} else if (node.lhs.type.equals(FLOAT) && node.rhs.type.equals(FLOAT)) {
+			node.type = FLOAT;
+		} else if (!node.lhs.type.equals(node.rhs.type)) {
+			System.out.println("Type error found: " + node.lhs.type
+					+ " does not match " + node.rhs.type);
+		} else {
+			System.out.println("Type error found: Incorrect types for power operation.");
+		}
 		return null;
 	}
 
