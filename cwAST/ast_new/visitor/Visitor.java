@@ -1,10 +1,47 @@
 package visitor;
 
-import ast.*;
-import ast.term.*;
-import ast.statement.*;
-import ast.expression.*;
-import ast.sequence.*;
+import ast.AccessNode;
+import ast.BlockNode;
+import ast.DataTypeDeclNode;
+import ast.ExponentNode;
+import ast.FactorNode;
+import ast.GlobalDeclListNode;
+import ast.LengthFunctionNode;
+import ast.LocalDeclListNode;
+import ast.ParameterListNode;
+import ast.VarDeclNode;
+import ast.VarInitNode;
+import ast.VarTypeNode;
+import ast.expression.BinaryExprNode;
+import ast.expression.ConcatExprNode;
+import ast.expression.EqualExprNode;
+import ast.expression.GreaterThanEqualExprNode;
+import ast.expression.GreaterThanExprNode;
+import ast.expression.InExprNode;
+import ast.expression.LessThanEqualExprNode;
+import ast.expression.LessThanExprNode;
+import ast.expression.MinusExprNode;
+import ast.expression.NotEqualExprNode;
+import ast.expression.OrExprNode;
+import ast.expression.PlusExprNode;
+import ast.literal.BoolLiteralNode;
+import ast.literal.CharLiteralNode;
+import ast.literal.FloatLiteralNode;
+import ast.literal.IntLiteralNode;
+import ast.sequence.ListSeqNode;
+import ast.sequence.StringSeqNode;
+import ast.sequence.TupleSeqNode;
+import ast.statement.AssignStmtNode;
+import ast.statement.FunctionCallStmtNode;
+import ast.statement.IfElseStmtNode;
+import ast.statement.RepeatUntilStmtNode;
+import ast.statement.ReturnStmtNode;
+import ast.statement.StmtListNode;
+import ast.statement.WhileStmtNode;
+import ast.term.AndTermNode;
+import ast.term.DivideTermNode;
+import ast.term.MultiplyTermNode;
+import ast.term.PowerTermNode;
 
 public interface Visitor {
 	
@@ -39,6 +76,12 @@ public interface Visitor {
 	public Object visit(NotEqualExprNode node);
 	public Object visit(OrExprNode node);
 	public Object visit(PlusExprNode node);
+	
+	/* Literal Nodes */
+	public Object visit(BoolLiteralNode node);
+	public Object visit(CharLiteralNode node);
+	public Object visit(FloatLiteralNode node);
+	public Object visit(IntLiteralNode node);
 	
 	/* Sequence Nodes */
 	public Object visit(ListSeqNode node);

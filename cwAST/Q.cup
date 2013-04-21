@@ -215,8 +215,8 @@ REPEAT LEFTBRACE statement_list:body RIGHTBRACE UNTIL LEFTPAREN expression:condi
 ;
 
 function_call ::=
-ID LEFTPAREN expression_clist:parameters RIGHTPAREN
-                                 {: RESULT = new FunctionCallStmtNode(parameters); :}  
+ID:name LEFTPAREN expression_clist:parameters RIGHTPAREN
+                                 {: RESULT = new FunctionCallStmtNode(name,parameters); :}  
 ;
 
 return ::= 

@@ -31,6 +31,10 @@ import ast.expression.MinusExprNode;
 import ast.expression.NotEqualExprNode;
 import ast.expression.OrExprNode;
 import ast.expression.PlusExprNode;
+import ast.literal.BoolLiteralNode;
+import ast.literal.CharLiteralNode;
+import ast.literal.FloatLiteralNode;
+import ast.literal.IntLiteralNode;
 import ast.sequence.ListSeqNode;
 import ast.sequence.StringSeqNode;
 import ast.sequence.TupleSeqNode;
@@ -752,6 +756,30 @@ public class SementicVisitor implements Visitor {
 			IdNode lastAccessor = ids.get(ids.size() - 1);
 			lastAccessor.accept(this);
 		}
+		return null;
+	}
+
+	@Override
+	public Object visit(BoolLiteralNode node) {
+		node.type = BOOL;
+		return null;
+	}
+
+	@Override
+	public Object visit(CharLiteralNode node) {
+		node.type = CHAR;
+		return null;
+	}
+
+	@Override
+	public Object visit(FloatLiteralNode node) {
+		node.type = FLOAT;
+		return null;
+	}
+
+	@Override
+	public Object visit(IntLiteralNode node) {
+		node.type = INT;
 		return null;
 	}
 
