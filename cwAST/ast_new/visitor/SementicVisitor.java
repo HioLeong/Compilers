@@ -1,4 +1,4 @@
-	package visitor;
+package visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,17 +178,19 @@ public class SementicVisitor implements Visitor {
 			System.out.println("Type error found: " + node.lhs.type
 					+ " does not match " + node.rhs.type);
 		} else {
-			System.out.println("Type error found: Incorrect types for power operation.");
+			System.out
+					.println("Type error found: Incorrect types for power operation.");
 		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(AssignStmtNode node) {
-		//TODO add casting if extra time 
-		if(node.a!=null){
-			if(!node.a.type.equals(node.rhs.type)){
-				System.out.println("Type error found: When assigning type "+node.a.type+" doesn't match type "+node.rhs.type);
+		// TODO add casting if extra time
+		if (node.a != null) {
+			if (!node.a.type.equals(node.rhs.type)) {
+				System.out.println("Type error found: When assigning type "
+						+ node.a.type + " doesn't match type " + node.rhs.type);
 			}
 		}
 		return null;
@@ -680,14 +682,16 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(LengthFunctionNode node) {
-		if(node.exprNode!=null){
+		if (node.exprNode != null) {
 			node.exprNode.accept(this);
 		}
-		if(node.exprNode.type.equals(LIST)||node.exprNode.type.equals(STRING)||node.exprNode.type.equals(TUPLE)){
-			node.type=INT;
-		}
-		else{
-			System.out.println("Type error found: Incorrect type declared for length function.");
+		if (node.exprNode.type.equals(LIST)
+				|| node.exprNode.type.equals(STRING)
+				|| node.exprNode.type.equals(TUPLE)) {
+			node.type = INT;
+		} else {
+			System.out
+					.println("Type error found: Incorrect type declared for length function.");
 		}
 		return null;
 	}
@@ -718,14 +722,14 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(ExponentNode node) {
-		if(node!=null){
+		if (node != null) {
 			node.accept(this);
 		}
-		if(node.type.equals(INT)||node.type.equals(FLOAT)){
+		if (node.type.equals(INT) || node.type.equals(FLOAT)) {
 			node.type = node.type;
-		}
-		else{
-			System.out.println("Type error found: Exponent type of "+node.type);
+		} else {
+			System.out.println("Type error found: Exponent type of "
+					+ node.type);
 		}
 		return null;
 	}
@@ -749,7 +753,8 @@ public class SementicVisitor implements Visitor {
 			System.out.println("Type error found: " + node.lhs.type
 					+ " does not match " + node.rhs.type);
 		} else {
-			System.out.println("Type error found: Incorrect types for power operation.");
+			System.out
+					.println("Type error found: Incorrect types for power operation.");
 		}
 		return null;
 	}
@@ -870,43 +875,39 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(ParExprNode node) {
-		if(node.outExpr != null){
+		if (node.outExpr != null) {
 			node.outExpr.accept(this);
 		}
-		if(node.expr1 != null){
+		if (node.expr1 != null) {
 			node.expr1.accept(this);
 		}
-		node.type=node.outExpr.type;
+		node.type = node.outExpr.type;
 		return null;
 	}
 
 	@Override
 	public Object visit(ParSeqExprNode node) {
-		if(node.outExpr != null){
+		if (node.outExpr != null) {
 			node.outExpr.accept(this);
 		}
-		if(node.expr1 != null){
+		if (node.expr1 != null) {
 			node.expr1.accept(this);
 		}
-		if(node.expr2 != null){
+		if (node.expr2 != null) {
 			node.expr2.accept(this);
 		}
-		if(!(node.outExpr.type.contains(LIST))||(node.outExpr.type.contains(TUPLE))||(node.outExpr.type.contains(STRING))){
+		if (!(node.outExpr.type.contains(LIST))
+				|| (node.outExpr.type.contains(TUPLE))
+				|| (node.outExpr.type.contains(STRING))) {
 			System.out.println("List slicing not called on a List or Tuple");
-		}else 
-		if((!node.expr1.type.equals(INT))||(!node.expr2.type.equals(INT))){
-			System.out.println("List slicing not called with integer parameters");
-		}else{
-		node.type=node.outExpr.type;
+		} else if ((!node.expr1.type.equals(INT))
+				|| (!node.expr2.type.equals(INT))) {
+			System.out
+					.println("List slicing not called with integer parameters");
+		} else {
+			node.type = node.outExpr.type;
 		}
 		return null;
 	}
-
-	@Override
-	public Object visit(FunctionDeclNode node) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }
