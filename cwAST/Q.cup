@@ -111,7 +111,7 @@ datatype_decl:dd
 ;
 
 function_decl ::= 
-FDEF ID LEFTPAREN parameter_clist:pl RIGHTPAREN COLON function_type:ft block:b {: RESULT = new FunctionDeclNode(pl,ft,b); :}
+FDEF ID:name LEFTPAREN parameter_clist:pl RIGHTPAREN COLON function_type:ft block:b {: RESULT = new FunctionDeclNode(name, pl,ft,b); :}
 ;
 
 var_type ::= 
