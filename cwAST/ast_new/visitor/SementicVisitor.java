@@ -90,76 +90,179 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(WhileStmtNode node) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public Boolean visit(BinaryExprNode node) {
+		
+		// Probably don't need this.
 		return null;
 	}
 
 	@Override
 	public Boolean visit(ConcatExprNode node) {
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(EqualExprNode node) {
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(GreaterThanEqualExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(GreaterThanExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(InExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(LessThanEqualExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(LessThanExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(MinusExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(NotEqualExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(OrExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
 	@Override
 	public Boolean visit(PlusExprNode node) {
-		// TODO Auto-generated method stub
+		if (node.lhs != null) {
+			node.lhs.accept(this);
+		}
+		if (node.rhs != null) {
+			node.lhs.accept(this);
+		}
+
+		// TODO: Add Type Checking
+		// TODO: Add Node Type
+
 		return null;
 	}
 
