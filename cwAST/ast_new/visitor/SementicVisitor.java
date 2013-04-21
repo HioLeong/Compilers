@@ -13,7 +13,13 @@ public class SementicVisitor implements Visitor {
 
 	public SymbolTable table;
 	public int numberOfErrors = 0;
-
+	
+	private final static String FLOAT = "FLOAT";
+	private final static String INT = "INT";
+	private final static String BOOL = "BOOL";
+	private final static String CHAR = "CHAR";
+	private final static String STRING = "STRING";
+	
 	public SementicVisitor() {
 		table = new SymbolTable();
 	}
