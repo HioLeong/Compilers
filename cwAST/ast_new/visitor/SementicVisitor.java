@@ -679,7 +679,15 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(LengthFunctionNode node) {
-		// TODO Auto-generated method stub
+		if(node.exprNode!=null){
+			node.exprNode.accept(this);
+		}
+		if(node.exprNode.type.equals(LIST)||node.exprNode.type.equals(STRING)||node.exprNode.type.equals(TUPLE)){
+			node.type=INT;
+		}
+		else{
+			System.out.println("Type error found: Incorrect type declared for length function.");
+		}
 		return null;
 	}
 
@@ -712,7 +720,10 @@ public class SementicVisitor implements Visitor {
 		if(node!=null){
 			node.accept(this);
 		}
-		if(!(node.type.equals(INT)||node.type.equals(FLOAT))){
+		if(node.type.equals(INT)||node.type.equals(FLOAT)){
+			node.type = node.type;
+		}
+		else{
 			System.out.println("Type error found: Exponent type of "+node.type);
 		}
 		return null;
