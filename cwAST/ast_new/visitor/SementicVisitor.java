@@ -454,13 +454,33 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(ListSeqNode node) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ExprNode> exprs = node.exprList.el.expressions;
+		ExprNode firstElem = exprs.get(0);
+		firstElem.accept(this);
+		String prevNode = firstElem.type;
+		for(ExprNode e: exprs){
+			e.accept(this);
+			if(!prevNode.equals(e.type))
+			{
+				System.out.println("List Type Error: List contains "+e.type+" and "+prevNode);
+				prevNode = null;
+				break; 
+			}
+			prevNode = e.type;		
+		}
+		node.type = "LIST"+prevNode;
+		return null;	
 	}
 
 	@Override
 	public Boolean visit(TupleSeqNode node) {
-		// TODO Auto-generated method stub
+		List<ExprNode> exprs = node.exprList.el.expressions;
+		String tupleListType = null;
+		for(ExprNode e: exprs){
+			e.accept(this);
+			tupleListType += e.type + ',';		
+		}
+		node.type = "TUPLE:"+tupleListType;
 		return null;
 	}
 
