@@ -19,6 +19,8 @@ public class SementicVisitor implements Visitor {
 	private final static String BOOL = "BOOL";
 	private final static String CHAR = "CHAR";
 	private final static String STRING = "STRING";
+	private final static String LIST = "LIST";
+	private final static String TUPLE = "TUPLE";
 	
 	public SementicVisitor() {
 		table = new SymbolTable();
@@ -52,28 +54,44 @@ public class SementicVisitor implements Visitor {
 		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
 			node.type=FLOAT;
 		}
-		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+		else if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
 			node.type=INT;
 		}
-		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+		else if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
 			node.type=FLOAT;
 		}
-		if(!node.lhs.type.equals(node.rhs.type)){
+		else if(!node.lhs.type.equals(node.rhs.type)){
 			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
-			
+		}
+		else {
+			System.out.println("Type error found: Incorrect types for multiplication operation.");
 		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(AndTermNode node) {
-		// TODO Auto-generated method stub
+		if(node.lhs != null){
+			node.lhs.accept(this);
+		}
+		if(node.rhs != null){
+			node.rhs.accept(this);
+		}
+		if(node.lhs.type.equals(BOOL)&&node.rhs.type.equals(BOOL)){
+			node.type=BOOL;
+		}
+		else if (!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+		}
+		else{
+			System.out.println("Type error found: Incorrect types for and operation.");
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(DivideTermNode node) {
-				if(node.lhs != null){
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
 		if(node.rhs != null){
@@ -82,22 +100,24 @@ public class SementicVisitor implements Visitor {
 		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
 			node.type=FLOAT;
 		}
-		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+		else if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
 			node.type=INT;
 		}
-		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+		else if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
 			node.type=FLOAT;
 		}
-		if(!node.lhs.type.equals(node.rhs.type)){
+		else if(!node.lhs.type.equals(node.rhs.type)){
 			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
-			
+		}
+		else {
+			System.out.println("Type error found: Incorrect types for division operation.");
 		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(PowerTermNode node) {
-				if(node.lhs != null){
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
 		if(node.rhs != null){
@@ -106,15 +126,17 @@ public class SementicVisitor implements Visitor {
 		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
 			node.type=FLOAT;
 		}
-		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+		else if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
 			node.type=INT;
 		}
-		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+		else if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
 			node.type=FLOAT;
 		}
-		if(!node.lhs.type.equals(node.rhs.type)){
+		else if(!node.lhs.type.equals(node.rhs.type)){
 			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
-			
+		}
+		else {
+			System.out.println("Type error found: Incorrect types for power operation.");
 		}
 		return null;
 	}
@@ -239,37 +261,53 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(LessThanEqualExprNode node) {
-		if (node.lhs != null) {
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
-		if (node.rhs != null) {
-			node.lhs.accept(this);
+		if(node.rhs != null){
+			node.rhs.accept(this);
 		}
-
-		// TODO: Add Type Checking
-		// TODO: Add Node Type
-
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(INT))||(node.lhs.type.equals(CHAR)&&node.rhs.type.equals(CHAR))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT))){
+			node.type=BOOL;
+		}
+		else if(node.lhs.type.equals(BOOL)&&node.rhs.type.equals(BOOL)){
+			System.out.println("Type error found: Not less than or equal expression used to compare boolean values.");
+		}
+		else if (!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+		}
+		else{
+			System.out.println("Type error found: Incorrect types used with less than or equal operation.");
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(LessThanExprNode node) {
-		if (node.lhs != null) {
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
-		if (node.rhs != null) {
-			node.lhs.accept(this);
+		if(node.rhs != null){
+			node.rhs.accept(this);
 		}
-
-		// TODO: Add Type Checking
-		// TODO: Add Node Type
-
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(INT))||(node.lhs.type.equals(CHAR)&&node.rhs.type.equals(CHAR))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT))){
+			node.type=BOOL;
+		}
+		else if(node.lhs.type.equals(BOOL)&&node.rhs.type.equals(BOOL)){
+			System.out.println("Type error found: Not less than expression used to compare boolean values.");
+		}
+		else if (!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+		}
+		else{
+			System.out.println("Type error found: Incorrect types used with less than operation.");
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(MinusExprNode node) {
-				if(node.lhs != null){
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
 		if(node.rhs != null){
@@ -278,52 +316,67 @@ public class SementicVisitor implements Visitor {
 		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
 			node.type=FLOAT;
 		}
-		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+		else if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
 			node.type=INT;
 		}
-		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+		else if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
 			node.type=FLOAT;
 		}
-		if(!node.lhs.type.equals(node.rhs.type)){
+		else if(!node.lhs.type.equals(node.rhs.type)){
 			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
-			
+		}
+		else {
+			System.out.println("Type error found: Incorrect types for subtraction operation.");
 		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(NotEqualExprNode node) {
-		if (node.lhs != null) {
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
-		if (node.rhs != null) {
-			node.lhs.accept(this);
+		if(node.rhs != null){
+			node.rhs.accept(this);
 		}
-
-		// TODO: Add Type Checking
-		// TODO: Add Node Type
-
+		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(INT))||(node.lhs.type.equals(CHAR)&&node.rhs.type.equals(CHAR))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT))){
+			node.type=BOOL;
+		}
+		else if(node.lhs.type.equals(BOOL)&&node.rhs.type.equals(BOOL)){
+			System.out.println("Type error found: Not equal expression used to compare boolean values.");
+		}
+		else if (!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+		}
+		else{
+			System.out.println("Type error found: Incorrect types used with not equal operation.");
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(OrExprNode node) {
-		if (node.lhs != null) {
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
-		if (node.rhs != null) {
-			node.lhs.accept(this);
+		if(node.rhs != null){
+			node.rhs.accept(this);
 		}
-
-		// TODO: Add Type Checking
-		// TODO: Add Node Type
-
+		if(node.lhs.type.equals(BOOL)&&node.rhs.type.equals(BOOL)){
+			node.type=BOOL;
+		}
+		else if (!node.lhs.type.equals(node.rhs.type)){
+			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
+		}
+		else{
+			System.out.println("Type error found: Incorrect types for or operation.");
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(PlusExprNode node) {
-				if(node.lhs != null){
+		if(node.lhs != null){
 			node.lhs.accept(this);
 		}
 		if(node.rhs != null){
@@ -332,15 +385,17 @@ public class SementicVisitor implements Visitor {
 		if((node.lhs.type.equals(INT)&&node.rhs.type.equals(FLOAT))||(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(INT))){
 			node.type=FLOAT;
 		}
-		if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
+		else if(node.lhs.type.equals(INT)&&node.rhs.type.equals(INT)){
 			node.type=INT;
 		}
-		if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
+		else if(node.lhs.type.equals(FLOAT)&&node.rhs.type.equals(FLOAT)){
 			node.type=FLOAT;
 		}
-		if(!node.lhs.type.equals(node.rhs.type)){
+		else if(!node.lhs.type.equals(node.rhs.type)){
 			System.out.println("Type error found: "+ node.lhs.type +" does not match "+node.rhs.type);
-			
+		}
+		else {
+			System.out.println("Type error found: Incorrect types for addition operation.");
 		}
 		return null;
 	}
