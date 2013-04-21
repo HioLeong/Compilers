@@ -46,6 +46,7 @@ public interface Visitor {
 	public Object visit(StringSeqNode node);
 	
 	/* Parameters, Declaration, etc */
+	public Object visit(AccessNode node);
 	public Object visit(GlobalDeclListNode node);
 	public Object visit(LocalDeclListNode node);
 	public Object visit(LengthFunctionNode node);

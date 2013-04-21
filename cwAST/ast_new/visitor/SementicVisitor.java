@@ -587,4 +587,14 @@ public class SementicVisitor implements Visitor {
 		return null;
 	}
 
+	@Override
+	public Object visit(AccessNode node) {
+		List<IdNode> ids = node.ids;
+		if(ids!=null){
+		IdNode lastAccessor = ids.get(ids.size()-1);
+		lastAccessor.accept(this);
+		}
+		return null;
+	}
+
 }
