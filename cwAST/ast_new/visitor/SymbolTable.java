@@ -10,12 +10,14 @@ public class SymbolTable {
 	public List<SymbolTable> children;
 	public Map<String, Symbol> symbols = new HashMap<String, Symbol>();
 
-	public void put(Symbol symbol) {
+	public boolean put(Symbol symbol) {
 
 		if (symbols.containsKey(symbol.getId())) {
 			System.out.println("Error, " + symbol.getId() + " already exists.");
+			return false;
 		} else {
 			symbols.put(symbol.getId(), symbol);
+			return true;
 		}
 	}
 

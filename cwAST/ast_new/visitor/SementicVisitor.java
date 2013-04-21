@@ -3,57 +3,25 @@ package visitor;
 import java.util.ArrayList;
 import java.util.List;
 
-import ast.BlockNode;
-import ast.DataTypeDeclNode;
-import ast.ExponentNode;
-import ast.FactorNode;
-import ast.GlobalDeclListNode;
-import ast.GlobalDeclNode;
-import ast.LengthFunctionNode;
-import ast.LocalDeclListNode;
-import ast.ParameterListNode;
-import ast.VarDeclNode;
-import ast.VarTypeNode;
-import ast.expression.BinaryExprNode;
-import ast.expression.ConcatExprNode;
-import ast.expression.EqualExprNode;
-import ast.expression.GreaterThanEqualExprNode;
-import ast.expression.GreaterThanExprNode;
-import ast.expression.InExprNode;
-import ast.expression.LessThanEqualExprNode;
-import ast.expression.LessThanExprNode;
-import ast.expression.MinusExprNode;
-import ast.expression.NotEqualExprNode;
-import ast.expression.OrExprNode;
-import ast.expression.PlusExprNode;
-import ast.sequence.ListSeqNode;
-import ast.sequence.StringSeqNode;
-import ast.sequence.TupleSeqNode;
-import ast.statement.AssignStmtNode;
-import ast.statement.FunctionCallStmtNode;
-import ast.statement.IfElseStmtNode;
-import ast.statement.RepeatUntilStmtNode;
-import ast.statement.ReturnStmtNode;
-import ast.statement.StmtListNode;
-import ast.statement.WhileStmtNode;
-import ast.term.AndTermNode;
-import ast.term.DivideTermNode;
-import ast.term.MultiplyTermNode;
-import ast.term.PowerTermNode;
+import ast.*;
+import ast.expression.*;
+import ast.sequence.*;
+import ast.statement.*;
+import ast.term.*;
 
 public class SementicVisitor implements Visitor {
 
-	public SymbolTable rootTable;
-	public SymbolTable currentTable;
-	public int NumberOfErrors = 0;
+	public SymbolTable table;
+	public int numberOfErrors = 0;
 
 	public SementicVisitor() {
-		rootTable = new SymbolTable();
-		currentTable = rootTable;
+		table = new SymbolTable();
 	}
 
 	@Override
 	public Boolean visit(BlockNode node) {
+
+		table = table.beginScope();
 
 		// Visit the Local Declaration List
 		if (node.ldl != null) {
@@ -63,6 +31,7 @@ public class SementicVisitor implements Visitor {
 		if (node.sl != null) {
 			node.sl.accept(this);
 		}
+		table = table.endScope();
 		return null;
 	}
 
@@ -252,6 +221,16 @@ public class SementicVisitor implements Visitor {
 		if (node.vt != null) {
 			node.vt.accept(this);
 		}
+		if (node.vi != null) {
+			node.vi.accept(this);
+		}
+
+		if (!node.vt.type.equals(node.vi.type)) {
+			System.out.println("Invalid variable declaration for variable "
+					+ node.vt.id + ".");
+			numberOfErrors++;
+		}
+
 		return null;
 	}
 
@@ -269,7 +248,6 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(DataTypeDeclNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -277,7 +255,26 @@ public class SementicVisitor implements Visitor {
 	public Object visit(VarTypeNode node) {
 		Symbol symbol = new Symbol();
 		symbol.setId(node.id);
-		
+
+		List<String> types = new ArrayList<String>();
+		types.add(node.type);
+		symbol.setKind(Kind.VAR);
+
+		node.type = types.get(0);
+
+		if (!table.put(symbol)) {
+			numberOfErrors++;
+		}
+
+		return null;
+	}
+
+	@Override
+	public Object visit(VarInitNode node) {
+		if (node.el != null) {
+			node.el.accept(this);
+		}
+		node.type = node.el.type;
 		return null;
 	}
 

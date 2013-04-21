@@ -53,6 +53,7 @@ public interface Visitor {
 	public Object visit(DataTypeDeclNode node);
 	public Object visit(VarDeclNode node);
 	public Object visit(VarTypeNode node);
+	public Object visit(VarInitNode node);
 	public Object visit(ExponentNode node);
 	public Object visit(FactorNode node);
 	

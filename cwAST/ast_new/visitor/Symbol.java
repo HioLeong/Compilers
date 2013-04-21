@@ -2,9 +2,6 @@ package visitor;
 
 import java.util.List;
 
-import ast.VarDeclNode;
-import ast.VarTypeNode;
-
 public class Symbol {
 
 	private String id;

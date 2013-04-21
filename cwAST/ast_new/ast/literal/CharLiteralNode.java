@@ -12,7 +12,6 @@ public class CharLiteralNode extends LiteralNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
