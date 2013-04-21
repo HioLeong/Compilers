@@ -4,9 +4,12 @@ import visitor.Visitor;
 
 
 
-public class StringSeqNode extends SequenceNode {
+public class StringSeqNode extends SeqNode {
+
+	public String str;
+
 	public StringSeqNode(String str){
-		super(str);
+		this.str = str;
 	}
 
 	@Override
