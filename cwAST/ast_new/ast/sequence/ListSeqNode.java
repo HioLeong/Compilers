@@ -5,9 +5,11 @@ import ast.expression.ExprListNode;
 
 public class ListSeqNode extends SeqNode {
 
-    public ListSeqNode(ExprListNode exprList) {
-       	super(exprList);
-    }
+	public ExprListNode exprList;
+
+	public ListSeqNode(ExprListNode exprList) {
+		this.exprList = exprList;
+	}
 
 	@Override
 	public Object accept(Visitor visitor) {

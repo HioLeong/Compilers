@@ -6,6 +6,7 @@ import ast.DataTypeDeclNode;
 import ast.ExponentNode;
 import ast.FactorNode;
 import ast.GlobalDeclListNode;
+import ast.IdNode;
 import ast.LengthFunctionNode;
 import ast.LocalDeclListNode;
 import ast.ParameterListNode;
@@ -89,6 +90,7 @@ public interface Visitor {
 	public Object visit(StringSeqNode node);
 	
 	/* Parameters, Declaration, etc */
+	public Object visit(IdNode node);
 	public Object visit(AccessNode node);
 	public Object visit(GlobalDeclListNode node);
 	public Object visit(LocalDeclListNode node);

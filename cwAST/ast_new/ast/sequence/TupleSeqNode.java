@@ -5,8 +5,11 @@ import ast.expression.ExprListNode;
 
 
 public class TupleSeqNode extends SeqNode {
-	public TupleSeqNode(ExprListNode exprlist){
-		super(exprlist);
+	
+	public ExprListNode exprList;
+	
+	public TupleSeqNode(ExprListNode exprList){
+		this.exprList = exprList;
 	}
 
 	@Override

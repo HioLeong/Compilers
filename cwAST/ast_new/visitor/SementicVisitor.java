@@ -783,4 +783,10 @@ public class SementicVisitor implements Visitor {
 		return null;
 	}
 
+	@Override
+	public Object visit(IdNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
