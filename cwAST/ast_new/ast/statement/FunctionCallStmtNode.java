@@ -5,6 +5,7 @@ import ast.expression.ExprListNode;
 
 public class FunctionCallStmtNode extends StmtNode {
     
+	public String id;
     public ExprListNode  parameters;
 
     public FunctionCallStmtNode(ExprListNode parameters) {

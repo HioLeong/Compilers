@@ -2,11 +2,13 @@ package visitor;
 
 import java.util.List;
 
+import ast.VarTypeNode;
+
 public class Symbol {
 
 	private String id;
 	private Kind kind;
-	private List<String> types;
+	private List<VarTypeNode> types;
 
 	public String getId() {
 		return id;
@@ -24,11 +26,11 @@ public class Symbol {
 		this.kind = kind;
 	}
 
-	public List<String> getTypes() {
+	public List<VarTypeNode> getTypes() {
 		return types;
 	}
 
-	public void setTypes(List<String> types) {
+	public void setTypes(List<VarTypeNode> types) {
 		this.types = types;
 	}
 

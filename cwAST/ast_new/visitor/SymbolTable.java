@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ast.VarTypeNode;
+
 public class SymbolTable {
 
 	public SymbolTable parent;
@@ -21,8 +23,8 @@ public class SymbolTable {
 		}
 	}
 
-	public String getType(String key) {
-		return symbols.get(key).getTypes().get(0);
+	public List<VarTypeNode> getTypes(String key) {
+		return symbols.get(key).getTypes();
 	}
 
 	public boolean lookup(String id) {
