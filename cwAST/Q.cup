@@ -302,9 +302,9 @@ term
 {: RESULT = new NotEqualExprNode(e,t);:}
 | expression:e CONCAT term:t
 {: RESULT = new ConcatExprNode(e,t);:}
-| expression:e LEFTBRACKET expression:e1 COLON expression:e2 RIGHTBRACKET {: RESULT = new ParExprNode(e,e1,e2); :}
-| expression:e LEFTBRACKET expression:e1 COLON RIGHTBRACKET {: RESULT = new ParExprNode(e,e1); :}
-| expression:e LEFTBRACKET COLON expression:e1 RIGHTBRACKET {: RESULT = new ParExprNode(e,e1); :}
+| expression:e LEFTBRACKET expression:e1 COLON expression:e2 RIGHTBRACKET {: RESULT = new ParSeqExprNode(e,e1,e2); :}
+| expression:e LEFTBRACKET expression:e1 COLON RIGHTBRACKET {: RESULT = new ParSeqExprNode(e,e1); :}
+| expression:e LEFTBRACKET COLON expression:e1 RIGHTBRACKET {: RESULT = new ParSeqExprNode(e,e1); :}
 | expression:e LEFTBRACKET expression:e1 RIGHTBRACKET {: RESULT = new ParExprNode(e,e1); :}
 ;
 
