@@ -183,6 +183,12 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(AssignStmtNode node) {
+		//TODO add casting if extra time 
+		if(node.a!=null){
+			if(!node.a.type.equals(node.rhs.type)){
+				System.out.println("Type error found: When assigning type "+node.a.type+" doesn't match type "+node.rhs.type);
+			}
+		}
 		return null;
 	}
 
@@ -642,7 +648,7 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(StringSeqNode node) {
-		// TODO Auto-generated method stub
+		node.type = STRING;
 		return null;
 	}
 
