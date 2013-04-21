@@ -17,6 +17,7 @@ public interface Visitor {
 	public Boolean visit(PowerTermNode node);
 	
 	/* Statement Nodes */
+	public Boolean visit(StmtListNode node);
 	public Boolean visit(AssignStmtNode node);
 	public Boolean visit(FunctionCallStmtNode node);
 	public Boolean visit(IfElseStmtNode node);
@@ -42,5 +43,14 @@ public interface Visitor {
 	public Boolean visit(ListSeqNode node);
 	public Boolean visit(TupleSeqNode node);
 	public Boolean visit(StringSeqNode node);
+	
+	/* Parameters, Declaration, etc */
+	public Boolean visit(GlobalDeclListNode node);
+	public Boolean visit(LocalDeclListNode node);
+	public Boolean visit(LengthFunctionNode node);
+	public Boolean visit(ParameterListNode node);
+	public Boolean visit(VarDeclNode node);
+	public Boolean visit(ExponentNode node);
+	public Boolean visit(FactorNode node);
 	
 }

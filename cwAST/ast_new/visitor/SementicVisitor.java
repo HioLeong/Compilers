@@ -1,6 +1,13 @@
 package visitor;
 
 import ast.BlockNode;
+import ast.ExponentNode;
+import ast.FactorNode;
+import ast.GlobalDeclListNode;
+import ast.LengthFunctionNode;
+import ast.LocalDeclListNode;
+import ast.ParameterListNode;
+import ast.VarDeclNode;
 import ast.expression.BinaryExprNode;
 import ast.expression.ConcatExprNode;
 import ast.expression.EqualExprNode;
@@ -21,6 +28,7 @@ import ast.statement.FunctionCallStmtNode;
 import ast.statement.IfElseStmtNode;
 import ast.statement.RepeatUntilStmtNode;
 import ast.statement.ReturnStmtNode;
+import ast.statement.StmtListNode;
 import ast.statement.WhileStmtNode;
 import ast.term.AndTermNode;
 import ast.term.DivideTermNode;
@@ -39,9 +47,12 @@ public class SementicVisitor implements Visitor {
 	@Override
 	public Boolean visit(BlockNode node) {
 
+		// Visit the Local Declaration List
 		if (node.ldl != null) {
 			node.ldl.accept(this);
 		}
+
+		// Visit the Statement List
 		if (node.sl != null) {
 			node.sl.accept(this);
 		}
@@ -194,6 +205,54 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(StringSeqNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(StmtListNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(GlobalDeclListNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(LocalDeclListNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(LengthFunctionNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(ParameterListNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(VarDeclNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(ExponentNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean visit(FactorNode node) {
 		// TODO Auto-generated method stub
 		return null;
 	}
