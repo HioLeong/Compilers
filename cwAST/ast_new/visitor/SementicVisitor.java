@@ -30,6 +30,8 @@ import ast.expression.LessThanExprNode;
 import ast.expression.MinusExprNode;
 import ast.expression.NotEqualExprNode;
 import ast.expression.OrExprNode;
+import ast.expression.ParExprNode;
+import ast.expression.ParSeqExprNode;
 import ast.expression.PlusExprNode;
 import ast.literal.BoolLiteralNode;
 import ast.literal.CharLiteralNode;
@@ -851,6 +853,38 @@ public class SementicVisitor implements Visitor {
 
 		table.put(functionSymbol);
 
+		return null;
+	}
+
+	@Override
+	public Object visit(ParExprNode node) {
+		if(node.outExpr != null){
+			node.outExpr.accept(this);
+		}
+		if(node.expr1 != null){
+			node.expr1.accept(this);
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(ParSeqExprNode node) {
+		if(node.outExpr != null){
+			node.outExpr.accept(this);
+		}
+		if(node.expr1 != null){
+			node.expr1.accept(this);
+		}
+		if(node.expr2 != null){
+			node.expr2.accept(this);
+		}
+		if(!(node.outExpr.type.contains(LIST))||(node.outExpr.type.contains(TUPLE))||(node.outExpr.type.contains(STRING))){
+			System.out.println("List slicing not called on a List or Tuple");
+		}else 
+		if((!node.expr1.type.equals(INT))||(!node.expr2.type.equals(INT))){
+			System.out.println("List slicing not called with integer parameters");
+		}
+		
 		return null;
 	}
 

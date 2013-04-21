@@ -24,6 +24,8 @@ import ast.expression.LessThanExprNode;
 import ast.expression.MinusExprNode;
 import ast.expression.NotEqualExprNode;
 import ast.expression.OrExprNode;
+import ast.expression.ParExprNode;
+import ast.expression.ParSeqExprNode;
 import ast.expression.PlusExprNode;
 import ast.literal.BoolLiteralNode;
 import ast.literal.CharLiteralNode;
@@ -77,6 +79,11 @@ public interface Visitor {
 	public Object visit(NotEqualExprNode node);
 	public Object visit(OrExprNode node);
 	public Object visit(PlusExprNode node);
+	public Object visit(ParExprNode node);
+	public Object visit(ParSeqExprNode node);
+
+	
+	
 	
 	/* Literal Nodes */
 	public Object visit(BoolLiteralNode node);
