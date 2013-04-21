@@ -761,6 +761,9 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(DataTypeDeclNode node) {
+		if(node!=null){
+			node.accept(this);
+		}
 		return null;
 	}
 
@@ -855,7 +858,7 @@ public class SementicVisitor implements Visitor {
 			symbol.setId(varType.id);
 			symbol.setKind(Kind.ARGS);
 			List<VarTypeNode> types = new ArrayList<VarTypeNode>();
-			types.add(varType);
+			types.add(varType);dat
 			table.put(symbol);
 		}
 
