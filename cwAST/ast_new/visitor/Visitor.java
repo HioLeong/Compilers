@@ -8,7 +8,8 @@ import ast.sequence.*;
 
 public interface Visitor {
 	
-	public Boolean visit(BlockNode node);
+	/* Base */
+	public Boolean visit(BlockNode node); //Done
 	
 	/* Term Nodes */
 	public Boolean visit(MultiplyTermNode node);
