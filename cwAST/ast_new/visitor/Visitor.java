@@ -9,49 +9,51 @@ import ast.sequence.*;
 public interface Visitor {
 	
 	/* Base */
-	public Boolean visit(BlockNode node); //Done
+	public Object visit(BlockNode node); //Done
 	
 	/* Term Nodes */
-	public Boolean visit(MultiplyTermNode node);
-	public Boolean visit(AndTermNode node);
-	public Boolean visit(DivideTermNode node);
-	public Boolean visit(PowerTermNode node);
+	public Object visit(MultiplyTermNode node);
+	public Object visit(AndTermNode node);
+	public Object visit(DivideTermNode node);
+	public Object visit(PowerTermNode node);
 	
 	/* Statement Nodes */
-	public Boolean visit(StmtListNode node);
-	public Boolean visit(AssignStmtNode node);
-	public Boolean visit(FunctionCallStmtNode node);
-	public Boolean visit(IfElseStmtNode node);
-	public Boolean visit(RepeatUntilStmtNode node);
-	public Boolean visit(ReturnStmtNode node);
-	public Boolean visit(WhileStmtNode node);
+	public Object visit(StmtListNode node);
+	public Object visit(AssignStmtNode node);
+	public Object visit(FunctionCallStmtNode node);
+	public Object visit(IfElseStmtNode node);
+	public Object visit(RepeatUntilStmtNode node);
+	public Object visit(ReturnStmtNode node);
+	public Object visit(WhileStmtNode node);
 	
 	/* Expression Nodes */
-	public Boolean visit(BinaryExprNode node);
-	public Boolean visit(ConcatExprNode node);
-	public Boolean visit(EqualExprNode node);
-	public Boolean visit(GreaterThanEqualExprNode node);
-	public Boolean visit(GreaterThanExprNode node);
-	public Boolean visit(InExprNode node);
-	public Boolean visit(LessThanEqualExprNode node);
-	public Boolean visit(LessThanExprNode node);
-	public Boolean visit(MinusExprNode node);
-	public Boolean visit(NotEqualExprNode node);
-	public Boolean visit(OrExprNode node);
-	public Boolean visit(PlusExprNode node);
+	public Object visit(BinaryExprNode node);
+	public Object visit(ConcatExprNode node);
+	public Object visit(EqualExprNode node);
+	public Object visit(GreaterThanEqualExprNode node);
+	public Object visit(GreaterThanExprNode node);
+	public Object visit(InExprNode node);
+	public Object visit(LessThanEqualExprNode node);
+	public Object visit(LessThanExprNode node);
+	public Object visit(MinusExprNode node);
+	public Object visit(NotEqualExprNode node);
+	public Object visit(OrExprNode node);
+	public Object visit(PlusExprNode node);
 	
 	/* Sequence Nodes */
-	public Boolean visit(ListSeqNode node);
-	public Boolean visit(TupleSeqNode node);
-	public Boolean visit(StringSeqNode node);
+	public Object visit(ListSeqNode node);
+	public Object visit(TupleSeqNode node);
+	public Object visit(StringSeqNode node);
 	
 	/* Parameters, Declaration, etc */
-	public Boolean visit(GlobalDeclListNode node);
-	public Boolean visit(LocalDeclListNode node);
-	public Boolean visit(LengthFunctionNode node);
-	public Boolean visit(ParameterListNode node);
-	public Boolean visit(VarDeclNode node);
-	public Boolean visit(ExponentNode node);
-	public Boolean visit(FactorNode node);
+	public Object visit(GlobalDeclListNode node);
+	public Object visit(LocalDeclListNode node);
+	public Object visit(LengthFunctionNode node);
+	public Object visit(ParameterListNode node);
+	public Object visit(DataTypeDeclNode node);
+	public Object visit(VarDeclNode node);
+	public Object visit(VarTypeNode node);
+	public Object visit(ExponentNode node);
+	public Object visit(FactorNode node);
 	
 }

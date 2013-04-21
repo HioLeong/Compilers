@@ -2,6 +2,6 @@ package visitor;
 
 public enum Kind {
 
-	METHOD, ARGS, VAR;
+	METHOD, ARGS, VAR, TDEF;
 
 }

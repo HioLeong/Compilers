@@ -14,8 +14,7 @@ public class VarDeclNode extends GlobalDeclNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
-		return null;
+		return visitor.visit(this);
 	}
 
 }

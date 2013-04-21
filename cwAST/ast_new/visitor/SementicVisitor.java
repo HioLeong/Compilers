@@ -1,13 +1,19 @@
 package visitor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ast.BlockNode;
+import ast.DataTypeDeclNode;
 import ast.ExponentNode;
 import ast.FactorNode;
 import ast.GlobalDeclListNode;
+import ast.GlobalDeclNode;
 import ast.LengthFunctionNode;
 import ast.LocalDeclListNode;
 import ast.ParameterListNode;
 import ast.VarDeclNode;
+import ast.VarTypeNode;
 import ast.expression.BinaryExprNode;
 import ast.expression.ConcatExprNode;
 import ast.expression.EqualExprNode;
@@ -37,11 +43,13 @@ import ast.term.PowerTermNode;
 
 public class SementicVisitor implements Visitor {
 
-	public SymbolTable table;
+	public SymbolTable rootTable;
+	public SymbolTable currentTable;
 	public int NumberOfErrors = 0;
 
 	public SementicVisitor() {
-		table = new SymbolTable();
+		rootTable = new SymbolTable();
+		currentTable = rootTable;
 	}
 
 	@Override
@@ -51,7 +59,6 @@ public class SementicVisitor implements Visitor {
 		if (node.ldl != null) {
 			node.ldl.accept(this);
 		}
-
 		// Visit the Statement List
 		if (node.sl != null) {
 			node.sl.accept(this);
@@ -61,7 +68,6 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(MultiplyTermNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -121,19 +127,16 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(BinaryExprNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Boolean visit(ConcatExprNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Boolean visit(EqualExprNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -217,13 +220,17 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(GlobalDeclListNode node) {
-		// TODO Auto-generated method stub
+		for (GlobalDeclNode child : node.statements) {
+			child.accept(this);
+		}
 		return null;
 	}
 
 	@Override
 	public Boolean visit(LocalDeclListNode node) {
-		// TODO Auto-generated method stub
+		for (VarDeclNode child : node.varDecls) {
+			child.accept(this);
+		}
 		return null;
 	}
 
@@ -241,7 +248,10 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(VarDeclNode node) {
-		// TODO Auto-generated method stub
+
+		if (node.vt != null) {
+			node.vt.accept(this);
+		}
 		return null;
 	}
 
@@ -254,6 +264,20 @@ public class SementicVisitor implements Visitor {
 	@Override
 	public Boolean visit(FactorNode node) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object visit(DataTypeDeclNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object visit(VarTypeNode node) {
+		Symbol symbol = new Symbol();
+		symbol.setId(node.id);
+		
 		return null;
 	}
 

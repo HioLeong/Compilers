@@ -20,7 +20,7 @@ public class SymbolTable {
 	}
 
 	public String getType(String key) {
-		return symbols.get(key).getTypes().get(0).vt.type;
+		return symbols.get(key).getTypes().get(0);
 	}
 
 	public boolean lookup(String id) {
