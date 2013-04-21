@@ -5,6 +5,7 @@ import ast.BlockNode;
 import ast.DataTypeDeclNode;
 import ast.ExponentNode;
 import ast.FactorNode;
+import ast.FunctionDeclNode;
 import ast.GlobalDeclListNode;
 import ast.IdNode;
 import ast.LengthFunctionNode;

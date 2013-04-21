@@ -8,6 +8,7 @@ import ast.BlockNode;
 import ast.DataTypeDeclNode;
 import ast.ExponentNode;
 import ast.FactorNode;
+import ast.FunctionDeclNode;
 import ast.GlobalDeclListNode;
 import ast.GlobalDeclNode;
 import ast.IdNode;
@@ -887,5 +888,6 @@ public class SementicVisitor implements Visitor {
 		
 		return null;
 	}
+
 
 }
