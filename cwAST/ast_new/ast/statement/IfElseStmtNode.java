@@ -1,5 +1,6 @@
 package ast.statement;
 
+import visitor.Visitor;
 import ast.expression.ExprNode;
 
 public class IfElseStmtNode extends StmtNode {
@@ -13,5 +14,11 @@ public class IfElseStmtNode extends StmtNode {
 		this.condition = condition;
 		this.ifbody = ifbody;
 		this.elsebody = elsebody;
+	}
+
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

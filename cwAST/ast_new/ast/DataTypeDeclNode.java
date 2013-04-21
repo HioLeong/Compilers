@@ -1,6 +1,6 @@
 package ast;
 
-import java.util.List;
+import visitor.Visitor;
 
 public class DataTypeDeclNode extends GlobalDeclNode {
 
@@ -8,6 +8,11 @@ public class DataTypeDeclNode extends GlobalDeclNode {
 
 	public DataTypeDeclNode(ParameterListNode pl) {
 		this.pl=pl;
+	}
+
+	@Override
+	public Object accept(Visitor visitor) {
+		return null;
 	}  
 
 

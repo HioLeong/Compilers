@@ -1,7 +1,6 @@
 package ast;
 
-import java.util.List;
-
+import visitor.Visitor;
 import ast.statement.StmtListNode;
 
 public class BlockNode extends Node {
@@ -15,7 +14,12 @@ public class BlockNode extends Node {
     }  
     public BlockNode(StmtListNode sl) {
     	this.sl=sl;
-    }  
+    }
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
+	}  
 
 
 }

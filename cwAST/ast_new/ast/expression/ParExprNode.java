@@ -1,5 +1,7 @@
 package ast.expression;
 
+import visitor.Visitor;
+
 
 public class ParExprNode extends ExprNode {
 
@@ -18,4 +20,10 @@ public class ParExprNode extends ExprNode {
        this.expr2=expr2;
        this.expr3=expr3;
     }
+
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

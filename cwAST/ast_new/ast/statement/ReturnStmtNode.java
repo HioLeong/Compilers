@@ -1,5 +1,6 @@
 package ast.statement;
 
+import visitor.Visitor;
 import ast.expression.ExprNode;
 
 public class ReturnStmtNode extends StmtNode {
@@ -10,4 +11,9 @@ public class ReturnStmtNode extends StmtNode {
     }
     public ReturnStmtNode (){
     }
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

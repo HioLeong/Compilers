@@ -1,6 +1,6 @@
 package ast;
 
-import java.util.List;
+import visitor.Visitor;
 
 public class FunctionDeclNode extends GlobalDeclNode {
 
@@ -12,7 +12,13 @@ public class FunctionDeclNode extends GlobalDeclNode {
     	this.b=b;
     	this.ft=ft;
     	this.pl=pl;
-    }  
+    }
+
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
+	}  
 
 
 }

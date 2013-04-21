@@ -8,39 +8,39 @@ import ast.sequence.*;
 
 public interface Visitor {
 	
-	public boolean visit(BlockNode node);
+	public Boolean visit(BlockNode node);
 	
 	/* Term Nodes */
-	public boolean visit(MultiplyTermNode node);
-	public boolean visit(AndTermNode node);
-	public boolean visit(DivideTermNode node);
-	public boolean visit(PowerTermNode node);
+	public Boolean visit(MultiplyTermNode node);
+	public Boolean visit(AndTermNode node);
+	public Boolean visit(DivideTermNode node);
+	public Boolean visit(PowerTermNode node);
 	
 	/* Statement Nodes */
-	public boolean visit(AssignStmtNode node);
-	public boolean visit(FunctionCallStmtNode node);
-	public boolean visit(IfElseStmtNode node);
-	public boolean visit(RepeatUntilStmtNode node);
-	public boolean visit(ReturnStmtNode node);
-	public boolean visit(WhileStmtNode node);
+	public Boolean visit(AssignStmtNode node);
+	public Boolean visit(FunctionCallStmtNode node);
+	public Boolean visit(IfElseStmtNode node);
+	public Boolean visit(RepeatUntilStmtNode node);
+	public Boolean visit(ReturnStmtNode node);
+	public Boolean visit(WhileStmtNode node);
 	
 	/* Expression Nodes */
-	public boolean visit(BinaryExprNode node);
-	public boolean visit(ConcatExprNode node);
-	public boolean visit(EqualExprNode node);
-	public boolean visit(GreaterThanEqualExprNode node);
-	public boolean visit(GreaterThanExprNode node);
-	public boolean visit(InExprNode node);
-	public boolean visit(LessThanEqualExprNode node);
-	public boolean visit(LessThanExprNode node);
-	public boolean visit(MinusExprNode node);
-	public boolean visit(NotEqualExprNode node);
-	public boolean visit(OrExprNode node);
-	public boolean visit(PlusExprNode node);
+	public Boolean visit(BinaryExprNode node);
+	public Boolean visit(ConcatExprNode node);
+	public Boolean visit(EqualExprNode node);
+	public Boolean visit(GreaterThanEqualExprNode node);
+	public Boolean visit(GreaterThanExprNode node);
+	public Boolean visit(InExprNode node);
+	public Boolean visit(LessThanEqualExprNode node);
+	public Boolean visit(LessThanExprNode node);
+	public Boolean visit(MinusExprNode node);
+	public Boolean visit(NotEqualExprNode node);
+	public Boolean visit(OrExprNode node);
+	public Boolean visit(PlusExprNode node);
 	
 	/* Sequence Nodes */
-	public boolean visit(ListSeqNode node);
-	public boolean visit(TupleSeqNode node);
-	public boolean visit(StringSeqNode node);
+	public Boolean visit(ListSeqNode node);
+	public Boolean visit(TupleSeqNode node);
+	public Boolean visit(StringSeqNode node);
 	
 }

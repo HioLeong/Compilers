@@ -2,6 +2,8 @@ package ast.statement;
 
 import java.util.List;
 
+import visitor.Visitor;
+
 import ast.Node;
 
 /**
@@ -15,7 +17,13 @@ public class StmtListNode extends Node {
 
     public StmtListNode(List<StmtNode> statements) {
         this.statements = statements;
-    }  
+    }
+
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
+	}  
 
 
 }

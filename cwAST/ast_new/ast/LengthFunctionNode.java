@@ -1,5 +1,6 @@
 package ast;
 
+import visitor.Visitor;
 import ast.expression.ExprNode;
 
 public class LengthFunctionNode extends Node {
@@ -8,6 +9,12 @@ public class LengthFunctionNode extends Node {
 
 	public LengthFunctionNode(ExprNode exprNode) {
 		this.exprNode = exprNode;
+	}
+
+	@Override
+	public Object accept(Visitor visitor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
