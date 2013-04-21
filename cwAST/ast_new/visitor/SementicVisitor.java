@@ -8,6 +8,7 @@ import ast.BlockNode;
 import ast.DataTypeDeclNode;
 import ast.ExponentNode;
 import ast.FactorNode;
+import ast.FunctionDeclNode;
 import ast.GlobalDeclListNode;
 import ast.GlobalDeclNode;
 import ast.IdNode;
@@ -875,6 +876,7 @@ public class SementicVisitor implements Visitor {
 		if(node.expr1 != null){
 			node.expr1.accept(this);
 		}
+		node.type=node.outExpr.type;
 		return null;
 	}
 
@@ -894,8 +896,15 @@ public class SementicVisitor implements Visitor {
 		}else 
 		if((!node.expr1.type.equals(INT))||(!node.expr2.type.equals(INT))){
 			System.out.println("List slicing not called with integer parameters");
+		}else{
+		node.type=node.outExpr.type;
 		}
-		
+		return null;
+	}
+
+	@Override
+	public Object visit(FunctionDeclNode node) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
