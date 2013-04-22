@@ -69,7 +69,7 @@ non terminal WhileStmtNode while;
 non terminal AssignStmtNode assignment;
 non terminal FunctionCallStmtNode function_call;
 non terminal ReturnStmtNode return;
-non terminal program;
+non terminal BlockNode program;
 
 precedence right POWER;
 precedence left DIVIDE, MULTIPLY;
@@ -85,8 +85,8 @@ start with program;
 type ::= BOOL | INT | FLOAT | STRING | CHAR | LIST | TUPLE | ID;
 
 program ::= 
-global_decl_list block {: System.out.println("Parsing Complete"); :}
-| block {: System.out.println("Parsing Complete"); :}
+global_decl_list:g block:b {: RESULT = new Program(g,b); System.out.println("Parsing Complete"); :}
+| block:b {: RESULT = new Program(b); System.out.println("Parsing Complete"); :}
 ;
 
 global_decl_list::= 
