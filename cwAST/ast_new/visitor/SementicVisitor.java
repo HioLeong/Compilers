@@ -698,7 +698,10 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Boolean visit(ParameterListNode node) {
-		// TODO Auto-generated method stub
+		List<VarTypeNode> parameters =node.parameterListSNode.varTypes;
+		for(VarTypeNode v: parameters){
+			v.accept(this);
+		}
 		return null;
 	}
 
