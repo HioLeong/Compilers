@@ -764,6 +764,15 @@ public class SementicVisitor implements Visitor {
 		if(node!=null){
 			node.accept(this);
 		}
+		Symbol symbol = new Symbol();
+		symbol.setId(node.type);
+		
+		symbol.setKind(Kind.TDEF);
+		List<VarTypeNode> types = node.pl.parameterListSNode.varTypes;
+		symbol.setTypes(types);
+		if(!table.put(symbol)){
+			reportError("TDEF Error");
+		}
 		return null;
 	}
 
@@ -858,7 +867,7 @@ public class SementicVisitor implements Visitor {
 			symbol.setId(varType.id);
 			symbol.setKind(Kind.ARGS);
 			List<VarTypeNode> types = new ArrayList<VarTypeNode>();
-			types.add(varType);dat
+			types.add(varType);
 			table.put(symbol);
 		}
 
