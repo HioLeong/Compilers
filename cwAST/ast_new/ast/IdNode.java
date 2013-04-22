@@ -12,6 +12,7 @@ public class IdNode extends Node {
 
 	@Override
 	public Object accept(Visitor visitor) {
+		visitor.visit(this);
 		return null;
 	}
 }

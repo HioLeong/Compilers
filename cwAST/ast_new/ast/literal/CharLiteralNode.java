@@ -12,6 +12,7 @@ public class CharLiteralNode extends LiteralNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
+		visitor.visit(this);
 		return null;
 	}
 	

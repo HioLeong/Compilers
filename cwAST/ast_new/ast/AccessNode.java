@@ -13,6 +13,7 @@ public class AccessNode extends Node {
 
 	@Override
 	public Object accept(Visitor visitor) {
+		visitor.visit(this);
 		return null;
 	}
 }

@@ -14,6 +14,7 @@ public class DataTypeDeclNode extends GlobalDeclNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
+		visitor.visit(this);
 		return null;
 	}  
 
