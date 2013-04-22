@@ -9,7 +9,7 @@ public class PowerTermNode extends BinaryTermNode {
 		super(lhs, rhs);
 	}
 
-	@Override
+	@Override 
 	public Object accept(Visitor visitor) {
 		visitor.visit(this);
 		return null;
