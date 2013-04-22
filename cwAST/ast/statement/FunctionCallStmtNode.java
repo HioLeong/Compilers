@@ -8,7 +8,7 @@ public class FunctionCallStmtNode extends StmtNode {
 	public String id;
     public ExprListNode  parameters;
 
-    public FunctionCallStmtNode(ExprListNode parameters) {
+    public FunctionCallStmtNode(String id,ExprListNode parameters) {
         this.parameters = parameters;
     }
 
