@@ -13,8 +13,7 @@ public class VarInitNode extends Node {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		visitor.visit(this);
-		return null;
+		return visitor.visit(this);
 	}
 
 }

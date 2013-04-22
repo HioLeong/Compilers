@@ -69,7 +69,7 @@ non terminal WhileStmtNode while;
 non terminal AssignStmtNode assignment;
 non terminal FunctionCallStmtNode function_call;
 non terminal ReturnStmtNode return;
-non terminal BlockNode program;
+non terminal Program program;
 
 precedence right POWER;
 precedence left DIVIDE, MULTIPLY;
@@ -108,9 +108,9 @@ global_decl_list:gl global_decl:g
 
 
 global_decl ::= 
-datatype_decl:dd 
-| var_decl:vd 
-| function_decl:fd 
+datatype_decl:dd {: RESULT = dd;:}
+| var_decl:vd
+| function_decl:fd {: RESULT = fd; :}
 ;
 
 function_decl ::= 
@@ -122,11 +122,11 @@ ID:name COLON type:t {:RESULT = new VarTypeNode(name,t);:}
 ; 
 
 var_decl ::= 
-var_type:vt var_init:vi SEMICOLON {: RESULT = new VarDeclNode(vt,vi); :};
+var_type:vt var_init:vi SEMICOLON {:RESULT = new VarDeclNode(vt,vi); :};
 
 var_init ::=
-ASSIGN expression_clist:el {: RESULT = new VarInitNode(el); :}
-|{: RESULT = null; :}
+ASSIGN expression_clist:el {:RESULT = new VarInitNode(el); :}
+|{:  RESULT = null; :}
 ;
 
 datatype_decl ::=
@@ -196,7 +196,7 @@ statement:s statement_list:sl
 
 statement ::= 
 assignment
-| function_call
+| function_call:fc {: RESULT = fc; :}
 | ifelse
 | while
 | repeatuntil
@@ -263,7 +263,7 @@ LEFTBRACKET expression_clist:ecl RIGHTBRACKET {: RESULT = new ListSeqNode(ecl); 
 ;
 
 expression_clist ::= 
-expression:e expression_clist2:el {: RESULT = new ExprListNode(e,el); :}
+expression:e expression_clist2:el {:RESULT = new ExprListNode(e,el); :}
 |  {: RESULT = null; :}
 ;
 
@@ -281,7 +281,7 @@ COMMA expression:e expression_clist2:el
 | {: RESULT = null;:}
 ;
 expression ::=
-term
+term:t {: RESULT = t; :}
 | NOT expression
 | expression:e PLUS term:t
 {: RESULT = new PlusExprNode(e,t);:}
@@ -312,7 +312,7 @@ term
 ;
 
 term ::=
-factor
+factor:f //{: RESULT = new FactorNode(null,f);:}
 | term:t MULTIPLY factor:f {: RESULT = new MultiplyTermNode(t,f); :}
 | term:t DIVIDE factor:f {: RESULT = new DivideTermNode(t,f); :}
 | term:t POWER factor:f {: RESULT = new PowerTermNode(t,f); :}
@@ -336,7 +336,7 @@ accessor:a {: RESULT = a; :}
 | FLOATLITERAL:f {: RESULT = new FloatLiteralNode(f); :}
 | BOOLLITERAL:b {: RESULT = new BoolLiteralNode(b); :}
 | CHARLITERAL:c {: RESULT = new CharLiteralNode(c); :}
-| function_call:fc 
+| function_call:fc {: RESULT = fc;:}
 | LENGTH LEFTPAREN expression:e RIGHTPAREN {: RESULT = new LengthFunctionNode(e); :}
 | sequence:s // This includes STRINGLITERAL
 ;

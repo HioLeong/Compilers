@@ -46,7 +46,7 @@ public class QC {
 		parser myParser = new parser(myScanner);
 	try{
 		Symbol result= myParser.parse();
-		Node root = (Node)result.value;
+		Program root = (Program)result.value;
 		SementicVisitor sv = new SementicVisitor();
 		root.accept(sv);
 		System.out.println("--------------------------------------------------------------------------");

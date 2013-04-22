@@ -18,8 +18,7 @@ public class FunctionDeclNode extends GlobalDeclNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		visitor.visit(this);
-		return null;
+		return visitor.visit(this);
 	}
 
 }

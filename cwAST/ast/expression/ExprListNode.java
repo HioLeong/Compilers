@@ -15,6 +15,6 @@ public class ExprListNode extends Node {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		return null;
+		return visitor.visit(this);
 	}
 }

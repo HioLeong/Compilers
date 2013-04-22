@@ -2,6 +2,7 @@ package visitor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import ast.AccessNode;
 import ast.BlockNode;
@@ -15,6 +16,7 @@ import ast.IdNode;
 import ast.LengthFunctionNode;
 import ast.LocalDeclListNode;
 import ast.ParameterListNode;
+import ast.Program;
 import ast.VarDeclNode;
 import ast.VarInitNode;
 import ast.VarTypeNode;
@@ -56,6 +58,8 @@ import ast.term.PowerTermNode;
 
 public class SementicVisitor implements Visitor {
 
+	private final static Logger LOGGER = Logger.getLogger("Semantic Visitor");
+	
 	public SymbolTable table;
 	public int numberOfErrors = 0;
 
@@ -199,14 +203,22 @@ public class SementicVisitor implements Visitor {
 	@Override
 	public Boolean visit(FunctionCallStmtNode node) {
 
+		System.out.println("evaluting");
 		if (!table.lookup(node.id)) {
 			reportError("Function " + node.id + " has not been declared.");
 			return false;
 		}
+		
 
 		// Looks at the number of parameters
 		Symbol functSymbol = table.search(node.id);
 		List<VarTypeNode> parameterTypes = functSymbol.getTypes();
+		System.out.println("Beginning");
+		for (VarTypeNode type : parameterTypes) {
+			System.out.println(type.type);
+		}
+		
+		
 		int parameterSize = parameterTypes.size() - 1;
 
 		if (parameterSize != getParameterSize(node.parameters)) {
@@ -675,7 +687,9 @@ public class SementicVisitor implements Visitor {
 	@Override
 	public Boolean visit(LocalDeclListNode node) {
 		for (VarDeclNode child : node.varDecls) {
+			System.out.println("Accepting local decl");
 			child.accept(this);
+			System.out.println("Accepted local decl");
 		}
 		return null;
 	}
@@ -710,18 +724,22 @@ public class SementicVisitor implements Visitor {
 		}
 		if (node.vi != null) {
 			node.vi.accept(this);
-		}
+		}		
 
 		if (!node.vt.type.equals(node.vi.type)) {
 			reportError("Invalid variable declaration for variable "
 					+ node.vt.id + ".");
 		}
+		System.out.println(node.vt.id + " assigned");
 
 		return null;
 	}
 
 	@Override
 	public Boolean visit(ExponentNode node) {
+		
+		System.out.println("Exponent node here");
+		
 		if (node != null) {
 			node.accept(this);
 		}
@@ -781,6 +799,8 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(VarTypeNode node) {
+		
+		
 		Symbol symbol = new Symbol();
 		symbol.setId(node.id);
 
@@ -794,15 +814,21 @@ public class SementicVisitor implements Visitor {
 			reportError("Variable " + node.id + " not within scope.");
 		}
 
+		System.out.println("Node " + node.id+node.type);
 		return null;
 	}
 
 	@Override
 	public Object visit(VarInitNode node) {
-		if (node.el != null) {
-			node.el.accept(this);
+		
+		if (node.el.el != null) {
+			System.out.println("Accepting Expression"+node.el.el.expressions.size());
+			node.el.el.expressions.get(0).accept(this);
+			node.type = node.el.el.expressions.get(0).type;
+			System.out.println("Accepted Expression");
 		}
 		node.type = node.el.type;
+		System.out.println("n"+ node.el.type);
 		return null;
 	}
 
@@ -847,20 +873,19 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(IdNode node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Boolean visit(FunctionDeclNode node) {
-		table = table.beginScope();
-		Symbol functionSymbol = new Symbol();
 
-		if (!table.lookup(node.id)) {
+		if (table.lookup(node.id)) {
 			reportError("The function name " + node.id + " already exists.");
 			return false;
 		}
 
+		table = table.beginScope();
+		Symbol functionSymbol = new Symbol();
 		functionSymbol.setId(node.id);
 		functionSymbol.setKind(Kind.METHOD);
 		List<VarTypeNode> varTypeNodes = new ArrayList<VarTypeNode>();
@@ -890,6 +915,7 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(ParExprNode node) {
+		System.out.println("Evaluting ParExprNode");
 		if (node.outExpr != null) {
 			node.outExpr.accept(this);
 		}
@@ -921,6 +947,40 @@ public class SementicVisitor implements Visitor {
 					.println("List slicing not called with integer parameters");
 		} else {
 			node.type = node.outExpr.type;
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(Program node) {
+		if(node.gdl.statements!=null)
+		{
+			System.out.println(node.gdl.statements.size());
+		}
+		List<GlobalDeclNode> gdl = node.gdl.statements;
+		for(GlobalDeclNode gd: gdl){
+			if (gd == null) {
+			} else {
+				System.out.println("accepting global decl");
+				gd.accept(this);
+				System.out.println("accepted global decl");
+			}
+		}
+		if(node.bn != null){
+			node.bn.accept(this);
+		}
+		return null;
+	}
+
+	@Override
+	public Object visit(ExprListNode node) {
+		if (node.e != null) {
+			node.e.accept(this);
+		} 
+		if (node.el != null) {
+			for (ExprNode child : node.el.expressions) {
+				child.accept(this);
+			}
 		}
 		return null;
 	}

@@ -11,12 +11,14 @@ import ast.IdNode;
 import ast.LengthFunctionNode;
 import ast.LocalDeclListNode;
 import ast.ParameterListNode;
+import ast.Program;
 import ast.VarDeclNode;
 import ast.VarInitNode;
 import ast.VarTypeNode;
 import ast.expression.BinaryExprNode;
 import ast.expression.ConcatExprNode;
 import ast.expression.EqualExprNode;
+import ast.expression.ExprListNode;
 import ast.expression.GreaterThanEqualExprNode;
 import ast.expression.GreaterThanExprNode;
 import ast.expression.InExprNode;
@@ -50,6 +52,7 @@ import ast.term.PowerTermNode;
 public interface Visitor {
 	
 	/* Base */
+	public Object visit(Program node); 
 	public Object visit(BlockNode node); //Done
 	
 	/* Term Nodes */
@@ -68,6 +71,7 @@ public interface Visitor {
 	public Object visit(WhileStmtNode node);
 	
 	/* Expression Nodes */
+	public Object visit(ExprListNode node);
 	public Object visit(BinaryExprNode node);
 	public Object visit(ConcatExprNode node);
 	public Object visit(EqualExprNode node);

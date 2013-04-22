@@ -8,7 +8,7 @@ public class Program extends Node {
 	public GlobalDeclListNode gdl;
 	public BlockNode bn;
 	
-    public Program(GlobalDeclListNode ldl, BlockNode bn) {
+    public Program(GlobalDeclListNode gdl, BlockNode bn) {
     	this.gdl=gdl;
     	this.bn=bn;
     }  
@@ -19,6 +19,4 @@ public class Program extends Node {
 	public Object accept(Visitor visitor) {
 		return visitor.visit(this);
 	}  
-
-
 }

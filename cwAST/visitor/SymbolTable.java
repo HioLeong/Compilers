@@ -1,5 +1,6 @@
 package visitor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ import ast.VarTypeNode;
 public class SymbolTable {
 
 	public SymbolTable parent;
-	public List<SymbolTable> children;
+	public List<SymbolTable> children = new ArrayList<SymbolTable>();
 	public Map<String, Symbol> symbols = new HashMap<String, Symbol>();
 
 	public boolean put(Symbol symbol) {
@@ -28,7 +29,16 @@ public class SymbolTable {
 	}
 
 	public boolean lookup(String id) {
-		return symbols.containsKey(id);
+		if (symbols.containsKey(id)) {
+			return true;
+		} else {
+			if (parent != null) {
+				if (parent.lookup(id)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public Symbol search(String id) {

@@ -14,6 +14,7 @@ public class GlobalDeclListNode extends Node {
 
 	@Override
 	public Object accept(Visitor visitor) {
+		System.out.println("GlobalDecl ");
 		return visitor.visit(this);
 	}
 
