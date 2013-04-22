@@ -847,7 +847,9 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(IdNode node) {
-		// TODO Auto-generated method stub
+		if(table.lookup(node.name)==false){
+			System.out.println("Id does not exist.");
+		}
 		return null;
 	}
 
