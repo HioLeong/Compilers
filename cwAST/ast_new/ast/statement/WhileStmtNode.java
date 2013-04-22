@@ -15,6 +15,7 @@ public class WhileStmtNode extends StmtNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
+		visitor.visit(this);
 		return null;
 	}
 }

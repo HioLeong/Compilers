@@ -12,7 +12,7 @@ public class DivideTermNode extends BinaryTermNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 		return null;
 	}
 }
