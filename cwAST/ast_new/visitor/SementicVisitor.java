@@ -761,18 +761,21 @@ public class SementicVisitor implements Visitor {
 
 	@Override
 	public Object visit(DataTypeDeclNode node) {
-		if(node!=null){
-			node.accept(this);
-		}
-		Symbol symbol = new Symbol();
-		symbol.setId(node.type);
-		
-		symbol.setKind(Kind.TDEF);
+
+		Symbol dataTypeSymbol = new Symbol();
+		dataTypeSymbol.setId(node.type);
+
+		dataTypeSymbol.setKind(Kind.TDEF);
 		List<VarTypeNode> types = node.pl.parameterListSNode.varTypes;
-		symbol.setTypes(types);
-		if(!table.put(symbol)){
+
+		// Adding to the table
+		dataTypeSymbol.setTypes(types);
+		if (!table.put(dataTypeSymbol)) {
 			reportError("TDEF Error");
 		}
+
+		VarTypeNode methodType = new VarTypeNode(node.typeName, node.typeName);
+		table.put(dataTypeSymbol);
 		return null;
 	}
 
