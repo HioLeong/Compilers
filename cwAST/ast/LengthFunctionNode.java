@@ -13,7 +13,7 @@ public class LengthFunctionNode extends Node {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 		return null;
 	}
 

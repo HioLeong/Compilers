@@ -8,14 +8,13 @@ public class FunctionCallStmtNode extends StmtNode {
 	public String id;
     public ExprListNode  parameters;
 
-    public FunctionCallStmtNode(String id, ExprListNode parameters) {
-    	this.id = id;
+    public FunctionCallStmtNode(ExprListNode parameters) {
         this.parameters = parameters;
     }
 
 	@Override
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 		return null;
 	}
 }

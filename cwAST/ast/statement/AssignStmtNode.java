@@ -14,9 +14,9 @@ public class AssignStmtNode extends StmtNode {
         this.rhs = rhs;
     }
 
-	@Override
+	@Override 
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 		return null;
 	}
 }

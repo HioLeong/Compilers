@@ -10,7 +10,7 @@ public class EqualExprNode extends BinaryExprNode {
 
 	@Override
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 		return null;
 	}
 }

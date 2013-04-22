@@ -9,9 +9,9 @@ public class AndTermNode extends BinaryTermNode {
         super(lhs,rhs);
     }
 
-	@Override
+	@Override 
 	public Object accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 		return null;
 	}
 }
