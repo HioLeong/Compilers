@@ -1,5 +1,11 @@
 import java_cup.runtime.*;
 import ast.*;
+import ast.literal.*;
+import ast.term.*;
+import ast.sequence.*;
+import ast.statement.*;
+import ast.expression.*;
+import visitor.*;
 import java.util.*;
 import java.util.List;
 
@@ -25,9 +31,6 @@ terminal NOT, OR, AND;
 terminal PLUS, MINUS, MULTIPLY, DIVIDE, POWER;
 terminal IN, LENGTH, CONCAT;
 terminal LESSTHAN, LESSTHANEQUAL, GREATERTHAN, GREATERTHANEQUAL, EQUAL, NOTEQUAL;
-/*class Q extends Parent implements Interface {
-	
-}*/
 terminal IF, ELSE, REPEAT, UNTIL, RETURN, DO, WHILE;
 
 non terminal String type;
@@ -38,7 +41,7 @@ non terminal FactorNode factor;
 non terminal ExponentNode exponent;
 non terminal Node final;
 non terminal AccessNode accessor;
-non terminal SequenceNode sequence;
+non terminal SeqNode sequence;
 non terminal ListSeqNode list;
 non terminal TupleSeqNode tuple;
 non terminal ExprListNode expression_clist;
@@ -127,7 +130,7 @@ ASSIGN expression_clist:el {: RESULT = new VarInitNode(el); :}
 ;
 
 datatype_decl ::=
-TDEF ID COLON parameter_clist:pl SEMICOLON {: RESULT = new DataTypeDeclNode(pl); :}
+TDEF ID:name COLON parameter_clist:pl SEMICOLON {: RESULT = new DataTypeDeclNode(name, pl); :}
 ;
 
 function_type ::= 
